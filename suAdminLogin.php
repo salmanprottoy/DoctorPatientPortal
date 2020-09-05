@@ -17,7 +17,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 	}
 	else
 	{
-      $username = $_POST['username'];
+      $username = mysqli_real_escape_string($conn, $_POST['username']);
     }
 
 	if(empty($_POST['password']))
@@ -26,7 +26,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 	}
 	else
 	{
-      $password = $_POST['password'];
+      $password = mysqli_real_escape_string($conn, $_POST['password']);
 	}
 	if(!empty($username) && !empty($password))
 	{
@@ -70,13 +70,13 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
             <table>
 				<tr>
 					<td><label>Username</label></td>
-					<td><input type="text" name="username" value="<?php echo "$username"; ?>"></td>
-					<span style="color:red;"><?php echo $usernameErr; ?></span>
+					<td><input type="text" name="username" value="<?php echo $username; ?>" required>
+					<span style="color:red;"><?php echo $usernameErr; ?></span></td>
 				</tr>
 				<tr>
 					<td><label>Password</label></td>
-					<td><input type="password" name="password"></td>
-					<span style="color:red;"><?php echo "$passwordErr"; ?></span>
+					<td><input type="password" name="password" required>
+					<span style="color:red;"><?php echo "$passwordErr"; ?></span></td>
 				</tr>
 				<tr>
 					<td></td>
