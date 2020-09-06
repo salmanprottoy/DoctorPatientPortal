@@ -138,7 +138,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
     <title>Login</title>
 </head>
 <body>
-	<div id="login_form">
+	<!-- <div id="login_form">
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
             <table id="login_table">
 				<tr>
@@ -167,6 +167,41 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 				</tr>
 			</table>
         </form>
+	</div> -->
+	
+	<div class="container">
+       <br>
+        <h1 class="text-white bg-dark text-center">
+            Login
+
+		</h1>
+		
+		<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype = "multipart/form-data">
+        <div class="col-lg-8 m-auto d-block">
+		
+		<div class="form-group">
+		<label >Type</label>
+			<select class="form-control" id="">
+			<option value="admin" <?php if($accountType == "admin") echo "selected"; ?>>Admin</option>
+						<option value="doctor" <?php if($accountType == "doctor") echo "selected"; ?>>Doctor</option>
+						<option value="patient" <?php if($accountType == "patient") echo "selected"; ?>>Patient</option>
+			</select>
+		</div>
+            <div class="form-group">
+                <label for="user" >Username:</label>
+                <input type="text" name="username"  value="<?php echo $username; ?>" id="user" class="form-control">
+                <span style="color:red;"><?php echo $usernameErr; ?></span></td>
+            </div>
+            <div class="form-group">
+                <label for="password" >Passwword</label>
+              
+				<input type="password" name="password" class="form-control" value="">
+				<span style="color:red;"><?php echo "$passwordErr"; ?></span></td>
+            </div>
+            <input type="submit" name="submit" value="SUBMIT" class="btn btn-success">
+        </form>
+        </div>
+    
     </div>
 </body>
 </html>
