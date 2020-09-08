@@ -1,6 +1,6 @@
 <?php
 
-require "includes/db_connect.inc.php";
+require "../includes/db_connect.inc.php";
 
 session_start();
 
