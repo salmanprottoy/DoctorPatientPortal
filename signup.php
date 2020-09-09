@@ -8,6 +8,8 @@ $accountType="";
 $username=$password=$cPassword=$fname=$lname=$dob=$bGroup=$email=$pNumber="";
 $usernameErr=$passwordErr=$cPasswordErr=$fnameErr=$lnameErr=$dobErr=$bGroupErr=$emailErr=$pNumberErr="";
 $uPassInDB="";
+$errExits=0;
+$regSuccessful="";
 
 if($_SERVER["REQUEST_METHOD"]=="POST")
 {
@@ -16,7 +18,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
     
 	if(empty($_POST['username']))
 	{
-      $usernameErr = "Username cannot be empty!";
+	  $usernameErr = "Username cannot be empty!";
+	  $errExits=1;
 	}
 	else
 	{
@@ -25,7 +28,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 
 	if(empty($_POST['password']))
 	{
-      $passwordErr = "Password cannot be empty!";
+	  $passwordErr = "Password cannot be empty!";
+	  $errExits=1;
 	}
 	else
 	{
@@ -34,7 +38,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 
     if(empty($_POST['cPassword']))
 	{
-      $cPasswordErr = "Password cannot be empty!";
+	  $cPasswordErr = "Password cannot be empty!";
+	  $errExits=1;
     }
 	else
 	{
@@ -43,7 +48,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
     
     if(empty($_POST['fname']))
 	{
-      $fnameErr = "First Name cannot be empty!";
+	  $fnameErr = "First Name cannot be empty!";
+	  $errExits=1;
 	}
 	else
 	{
@@ -52,7 +58,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 
     if(empty($_POST['lname']))
 	{
-      $lnameErr = "Last Name cannot be empty!";
+	  $lnameErr = "Last Name cannot be empty!";
+	  $errExits=1;
 	}
 	else
 	{
@@ -61,7 +68,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 
     if(empty($_POST['dob']))
 	{
-      $dobErr = "Date of Birth cannot be empty!";
+	  $dobErr = "Date of Birth cannot be empty!";
+	  $errExits=1;
 	}
 	else
 	{
@@ -70,7 +78,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 
     if(empty($_POST['bGroup']))
 	{
-      $bGroupErr = "Blood group cannot be empty!";
+	  $bGroupErr = "Blood group cannot be empty!";
+	  $errExits=1;
 	}
 	else
 	{
@@ -79,7 +88,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 
     if(empty($_POST['email']))
 	{
-      $emailErr = "Email cannot be empty!";
+	  $emailErr = "Email cannot be empty!";
+	  $errExits=1;
 	}
 	else
 	{
@@ -88,7 +98,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 
     if(empty($_POST['pNumber']))
 	{
-      $pNumberErr = "Email cannot be empty!";
+	  $pNumberErr = "Email cannot be empty!";
+	  $errExits=1;
 	}
 	else
 	{
@@ -97,18 +108,53 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 
     if($password!=$cPassword)
       {
-        $cPasswordErr = "Password do not matched!";
-      }
+		$cPasswordErr = "Password do not matched!";
+		$errExits=1;
+	  }
+	  
+	  $uPassInDB=password_hash($password, PASSWORD_DEFAULT);
 
-	if(!empty($username) && !empty($password) && !empty($cPassword))
+	if($errExits!=1)
 	{
 		if($accountType=="doctor")
 		{
-			
+			$sqlUsers = "select d_id from doctor where d_name = '$userName'";
+      		$results = mysqli_query($conn, $sqlUsers);
+
+			  $rowCount = mysqli_num_rows($results);
+			  if($rowCount > 0)
+			  {
+				$usernameErr = "User already exists!";
+			  }
+			  else
+			  {
+				  $sqlInsert = "insert into doctor (d_name, d_pass, d_fname, d_lname, d_dob, d_bgroup, d_email, d_phone)
+				  values('$username', '$uPassInDB','$fname','$lname', '$dob', '$bGroup', '$email', '$pNumber');";
+
+				  mysqli_query($conn, $sqlInsert);
+				  $regSuccessful = "Registration was successful";
+				  header("Location: ./login.php");
+			  }
 		}
 		else if($accountType=="patient")
 		{
-			
+			$sqlUsers = "select p_id from patient where p_name = '$userName'";
+      		$results = mysqli_query($conn, $sqlUsers);
+
+			  $rowCount = mysqli_num_rows($results);
+			  if($rowCount > 0)
+			  {
+				$usernameErr = "User already exists!";
+			  }
+			  else
+			  {
+				  $sqlInsert = "insert into patient (p_name, p_pass, p_fname, p_lname, p_dob, p_bgroup, p_email, p_phone)
+				  values('$username', '$uPassInDB','$fname','$lname', '$dob', '$bGroup', '$email', '$pNumber');";
+
+				  mysqli_query($conn, $sqlInsert);
+				  $regSuccessful = "Registration was successful";
+				  header("Location: ./login.php");
+			  }
 		}
 	}
 }
@@ -144,6 +190,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
     </section>
 	<div class="container">
        <br>
+	   	<h3 style="color:green;"><?php echo $regSuccessful; ?></h3>
         <h1 class="text-black text-center">Signup</h1>
 		<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype = "multipart/form-data">
         	<div class="col-lg-8 m-auto d-block">
