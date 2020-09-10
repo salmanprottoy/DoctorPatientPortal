@@ -1,3 +1,5 @@
+
+
 *
 {
     margin: 0;
@@ -42,12 +44,13 @@ input {
     font-weight: 600;
     float: right;
     text-align: left;
+    margin-bottom: 3px;
 }
 
 .navbar-nav li a:hover{
-    background-color: #049985;
-    border-radius: 50px;
-
+    background: none !important;
+    border-bottom: #ffffff 3px solid;
+    margin-bottom: 0;
 }
 
 .fa-bars{
@@ -62,20 +65,26 @@ input {
 #banner{
     background-color: #00BFA6;
     color: #ffffff;
-    padding-top: 5%;
+    
+    height: 50%;
 }
 .title-index{
     font-size: 40px;
     font-weight: 600;
-    margin-top: 100px;
+    padding-top: 130px;
 }
 .heart_img{
-    height: 200%;
+    /* height: 200%;
     width: 120%;
-    margin-top: -100px;
+    margin-top: -100px; */
+    height: 100%;
+    width: 100%;
+    margin-top: 0px;
+    margin-top: -20px;
  }
 .bottom-img{
     width: 100%;
+   
 }
 
 /*--------------services------------*/
@@ -200,8 +209,5 @@ hr{
     text-align: center;
 }
 
-/*----------------Login----------------*/
-#container{
-  background-color: #00BFA6;
-}
+/*----------------Login-Sign up----------------*/
 

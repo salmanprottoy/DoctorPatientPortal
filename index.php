@@ -2,11 +2,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doctor Patient Portal</title>
+    <title>Doctor-Patient Portal</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -20,7 +20,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav ml-auto" align="right">
                 <li class="nav-item active">
-                  <a class="nav-link" href="index.php">Home </a>
+                  <a class="nav-link" href="index.html">Home </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#services">Services</a>
@@ -67,20 +67,20 @@
             <div class="row text-center">
                 <div class="col-md-4 services">
                     <img src="images/booking.png" class="service-img">
-                    <h4>Appointment Service</h4>
-                    <p></p>
+                    <h4>Appointment</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus dolore temporibus, delectus natus ad iure pariatur corrupti ullam officiis dolores quod animi reiciendis hic doloribus. Quos saepe repellendus explicabo id!</p>
                 </div>
                 <div class="col-md-4 services">
                     <img src="images/booking.png" class="service-img">
-                    <h4>Organ Donation</h4>
-                    <p></p>
+                    <h4>Appointment</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus dolore temporibus, delectus natus ad iure pariatur corrupti ullam officiis dolores quod animi reiciendis hic doloribus. Quos saepe repellendus explicabo id!</p>
                 </div>
                 <div class="col-md-4 services">
                     <img src="images/booking.png" class="service-img">
-                    <h4>Corona Update</h4>
-                    <p></p>
+                    <h4>Appointment</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus dolore temporibus, delectus natus ad iure pariatur corrupti ullam officiis dolores quod animi reiciendis hic doloribus. Quos saepe repellendus explicabo id!</p>
                 </div>
-
+            </div>
            <!-- <button type="button" class="btn btn-primary">All Services</button>-->
         </div>
     </section>
@@ -93,12 +93,12 @@
                 <div class="col-md-6 about-us">
                     <p class="about-title">Why we're different:</p>
                     <ul>
-                        <li>Better service.</li>
-                        <li>Realtime doctor updated list.</li>
-                        <li>Can find donor easily.</li>
-                        <!-- <li>Lorem ipsum dolor sit amet consectetur.</li>
                         <li>Lorem ipsum dolor sit amet consectetur.</li>
-                        <li>Lorem ipsum dolor sit amet consectetur.</li> -->
+                        <li>Lorem ipsum dolor sit amet consectetur.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur.</li>
                     </ul>
                 </div>
                  <div class="col-md-6">
@@ -114,17 +114,17 @@
             <h1 class="title text-center">WHAT CLIENT SAY</h1>
             <div class="row">
                 <div class="col-md-4 testimonials">
-                    <p>Great service, loved it.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis quibusdam eum possimus facilis? Cumque, eveniet.</p>
                     <img src="images/ronaldo.jpg" alt="">
                     <p class="user-review"><b>Ronaldo</b><br>King at UCL</p>
                 </div>
                 <div class="col-md-4 testimonials">
-                    <p>Never faced any problem.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis quibusdam eum possimus facilis? Cumque, eveniet.</p>
                     <img src="images/messi.jpg" alt="">
                     <p class="user-review"><b>Messi</b><br>Superstar at Barcelona</p>
                 </div>
                 <div class="col-md-4 testimonials">
-                    <p>Got an appointment less than a minute.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis quibusdam eum possimus facilis? Cumque, eveniet.</p>
                     <img src="images/neymar.jpg" alt="">
                     <p class="user-review"><b>Neymar</b><br>Dribbler at PSG</p>
                 </div>
@@ -144,13 +144,13 @@
             <div class="row">
                 <div class="col-md-4 footer-box">
                     <img src="images/logo1.png" alt="">
-                    <p><a href="./suAdmin/suAdminLogin.php">..</a></p>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cupiditate, accusamus repellendus. Ad voluptas inventore mollitia.</p>
                 </div>
                 <div class="col-md-4 footer-box">
                     <p><b>CONTACT US</b></p>
                     <p> <i class="fa fa-map-marker"></i> AIUB</p>
-                    <p><i class="fa fa-phone"></i> +8801711111111</p>
-                    <p><i class="fa fa-envelope-o "></i> dppAdmin@gmail.com</p>
+                    <p><i class="fa fa-phone"></i> +880 1111111111111</p>
+                    <p><i class="fa fa-envelope-o "></i> abc@gmail.com</p>
                 </div>
                 <div class="col-md-4 footer-box">
                     <p>FIND US ON SOCIAL MEDIA</p>
@@ -158,11 +158,14 @@
                         <a href="#"><img src="images/fb.png" alt=""></a>
                         <a href="#"><img src="images/insta.png" alt=""></a>
                         
+                        <a href="#"><img src="images/whtsapp.png" alt=""></a>
+                        <a href="#"><img src="images/linkedin.png" alt=""></a>
+                        <a href="#"><img src="images/utube.png" alt=""></a>
                     </div>
                 </div>
             </div>
             <hr>
-            <p class="copyright">Designed by Rayhan, Salman, Alvy & Anika</p>
+            <p class="copyright">Designed by Rayhan,Salman,Alvy & Anika</p>
         </div>
     </section>
 </body>

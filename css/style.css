@@ -1,0 +1,138 @@
+*, *:after, *:before {
+  box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
+}
+.blue {
+  background: #2abdfc;
+  color: #fff;
+}
+.navbar {
+  padding: 10px 10%;
+}
+#logo {
+  display: inline-block;
+  margin-top: 7px;
+  color: #fff;
+}
+#link {
+  color: #fff;
+  font-weight: bold;
+  margin: 0 10px;
+}
+i { margin: 0 7px; }
+#sidebarCollapse {
+  color: #fff;
+  background: transparent;
+  outline: none;
+  margin: 0 20px;
+}
+#sidebarCollapse:hover {
+  color: #2abdfc;
+  background: #fff;
+  outline: none;
+}
+.wrapper {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+  margin-top: 70px;
+}
+#sidebar {
+  min-width: 250px;
+  max-width: 250px;
+  background: #7386D5;
+  color: #fff;
+
+  transition: all 0.5s;
+}
+#sidebar.active{
+margin-left: -250px;
+}
+
+
+#sidebar ul.components{
+  margin-top: 30px;
+padding: 20px 0px;
+
+}
+
+
+
+#sidebar ul li a{
+padding: 20px ;
+text-decoration: none;
+color: #fff;
+font-size: 1.1em;
+font-weight: bold;
+display: block;
+border-bottom: 2px solid #e9eaeb;
+}
+#sidebar ul li a:hover {
+  color: #7386D5;
+  background: #fff;
+}
+
+#sidebar ul li.active>a,
+a[aria-expanded="true"] {
+  color: #fff;
+  background: #6d7fcc;
+}
+a[data-toggle="collapse"] {
+  position: relative;
+}
+.dropdown-toggle::after {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+#sidebar ul li ul li a {
+  font-size: 0.9em !important;
+  padding-left: 50px !important;
+  background: #4b578d;
+  border-bottom: 0px solid #e9eaeb;
+}
+
+
+
+.content {
+  margin: 40px;
+  width: 100%;
+  padding: 20px;
+  min-height: 90vh;
+  transition: all 0.3s;
+}
+
+@media(max-width:800px){
+#sidebar{margin-left: -250px;}
+#sidebar.active{
+  margin-left: 0px;
+}
+#sidebarCollapse span{
+  display: none;
+}
+}
+@media (max-width:400px) {
+  #sidebar {
+    margin-top: -20px;
+  }
+  #logo {
+    display: none;
+  }
+}
+
+/* -----------patientprofile--------------------- */
+.patientprofile{
+  margin: 10px;
+}
+
+ .patientprofile .well img{
+  margin-bottom: 20px;
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  position: relative;
+  
+}
