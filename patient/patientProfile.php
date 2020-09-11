@@ -34,8 +34,10 @@ if(isset($_POST['passUpdate']))
 
 if(isset($_POST['infoUpdate']))
 {
-    $query="UPDATE 'patient' SET p_fname='$_POST[fname]', p_lname='$_POST[lname]', p_dob='$_POST[dob]', p_bgroup='$_POST[bGroup]', p_email='$_POST[email]', p_phone='$_POST[pNumber]'
-    WHERE p_name=$user;";
+    // $query="UPDATE 'patient' SET p_fname='$_POST[fname]', p_lname='$_POST[lname]', p_dob='$_POST[dob]', p_bgroup='$_POST[bGroup]', p_email='$_POST[email]', p_phone='$_POST[pNumber]'
+    // WHERE p_name='$user';";
+
+    $query = "UPDATE `patient` SET `p_fname`='$_POST[fname]',`p_lname`='$_POST[lname]',`p_dob`='$_POST[dob]',`p_bgroup`='$_POST[bGroup]',`p_email`='$_POST[email]',`p_phone`='$_POST[pNumber]' WHERE `p_name` = '$user';";
     echo 
     $query_run=mysqli_query($conn, $query);
     if($query_run)

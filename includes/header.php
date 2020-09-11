@@ -31,6 +31,7 @@
   <script src="../js/script.js"></script>
 
   <title> Doctor Patient Portal </title>
+  <link rel="shortcut icon" type="image/png" href="../images/logo1.png">
 </head>
 
 <body>
