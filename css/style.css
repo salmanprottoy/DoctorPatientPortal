@@ -37,12 +37,14 @@ i { margin: 0 7px; }
   width: 100%;
   align-items: stretch;
   margin-top: 70px;
+  min-height: 90vh;
 }
 #sidebar {
   min-width: 250px;
   max-width: 250px;
   background: #7386D5;
   color: #fff;
+  margin-top: -3%;
 
   transition: all 0.5s;
 }
