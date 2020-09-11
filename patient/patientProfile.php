@@ -1,7 +1,7 @@
 <?php
 session_start();
 include ('../includes/db_connect.inc.php');
-include ('header.php');
+include ('../includes/header.php');
 include ('navbar.php');
 include ('sidebar.php');
 
@@ -227,4 +227,4 @@ $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
                 </div>
             </div>
 
- <?php include ('footer.php');  ?>
+ <?php include ('../includes/footer.php');  ?>
