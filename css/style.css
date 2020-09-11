@@ -17,10 +17,11 @@
 .navbarSupportedContent ul,li:hover{
   color: #1b776b;
 }
-#logo {
+#logo{
   display: inline-block;
-  margin-top: 7px;
-  color: #fff;
+  height: 50px;
+ 
+
 }
 #link{
   color: #fff;

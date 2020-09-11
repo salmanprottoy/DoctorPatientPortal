@@ -75,7 +75,7 @@ $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
                                 
                                 <tr>
                                 
-                                    <td>First Name</td>
+                                    <td>Phone</td>
                                     <td><?php echo $userRow['p_phone']; ?></td>
                                
                                 </tr>
@@ -165,8 +165,8 @@ $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
                     <form>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Name</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"><?php echo $userRow['p_fname']; ?></input>
+                           
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Type</label>

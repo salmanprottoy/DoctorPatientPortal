@@ -3,7 +3,7 @@
         <i class="fas fa-lg fa-bars"></i>
         </button>
         <a class="navbar-brand" href="index.php">
-        <h3 id="logo"><i class="fa fa-heartbeat" aria-hidden="true"></i><span> Patient Portal</span></h3>
+        <img src="../images/logo1.png" id="logo" alt="">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
