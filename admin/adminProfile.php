@@ -1,197 +1,215 @@
-<?php 
-    include("index.php"); 
+<?php
+session_start();
+include ('../includes/db_connect.inc.php');
+include ('../includes/header.php');
+include ('navbar.php');
+include ('sidebar.php');
+
+
+if(!isset(	$_SESSION['user_name'])){
+    header("../login.php");
+}
+$username=$password=$cPassword=$nPassword=$fname=$lname=$dob=$bGroup=$email=$pNumber="";
+$passwordErr=$cPasswordErr=$nPasswordErr="";
+$hashPass="";
+$error=0;
+$user = $_SESSION['user_name'];
+$res = mysqli_query($conn,"SELECT * FROM `admin` WHERE `a_name` = '$user';" );
+$userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
+
+$username=$userRow['a_name'];
+$dbPassword=$userRow['a_pass'];
+
+
+    if(empty($_POST['password']))
+	{
+      $passwordErr = "Password cannot be empty!";
+      $error=1;
+	}
+	else
+	{
+      $password = mysqli_real_escape_string($conn, $_POST['password']);
+    }
+
+    if(empty($_POST['cPassword']))
+	{
+      $cPasswordErr = "Password cannot be empty!";
+      $error=1;
+    }
+	else
+	{
+      $cPassword = mysqli_real_escape_string($conn, $_POST['cPassword']);
+    }
+    if(empty($_POST['nPassword']))
+	{
+      $nPasswordErr = "Password cannot be empty!";
+      $error=1;
+    }
+	else
+	{
+      $nPassword = mysqli_real_escape_string($conn, $_POST['nPassword']);
+    }
+
+    if($cPassword==$nPassword)
+    {
+        if(password_verify($password, $dbPassword))
+        {
+            $hashPass=password_hash($cPassword, PASSWORD_DEFAULT);
+        }
+        else
+        {
+            $error=1;
+        }
+    }
+    else
+    {
+        $error=1;
+    }
+
+
+
+if(isset($_POST['imgUpdate']))
+{
+
+}
+if(isset($_POST['passUpdate']))
+{
+    if($error==0)
+    {
+        $query="UPDATE `patient` SET `p_pass`='$hashPass' WHERE `p_name` = '$user';";
+        $query_run=mysqli_query($conn, $query);
+        if($query_run)
+        {
+            echo'<script type=text/javaScript> alert("Password Updated") </script>';
+        }
+        else
+        {
+            echo'<script type=text/javaScript> alert("Something wrong Password not updated!") </script>';
+        }
+    }
+
+    else
+    {
+        echo'<script type=text/javaScript> alert("Something wrong Password not updated!") </script>';
+    }
+}
+if(isset($_POST['infoUpdate']))
+{
+
+    $query = "UPDATE `patient` SET `p_fname`='$_POST[fname]',`p_lname`='$_POST[lname]',`p_dob`='$_POST[dob]',`p_bgroup`='$_POST[bGroup]',`p_email`='$_POST[email]',`p_phone`='$_POST[pNumber]' WHERE `p_name` = '$user';";
+    $query_run=mysqli_query($conn, $query);
+    if($query_run)
+    {
+        echo'<script type=text/javaScript> alert("Data Updated") </script>';
+    }
+    else
+    {
+        echo'<script type=text/javaScript> alert("Something wrong data not updated!") </script>';
+    }
+}
+
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-</head>
-<body>
-    <div class="wrapper">
-    
-        <div class="main-container">
-                    
-            <div class="adminprofile">
-                <div class="adminprofilepic">
-                    <img src="../images/ronaldo.jpg" alt="">
-                    <i class="fa fa-pencil-square" aria-hidden="true"></i>
-                    <h2>Username</h2>    
-                    </div>
-                    
-                    <div class="adminprofileinfo">
-                        <h1>Personal Information</h1>
-                        <div class="table-box">
-                            <div class="table-row">
-                            <div class="table-cell">
-                                <p>Name:</p>
-                            </div>
-                            <div class="table-cell">
-                                <p>Cristiano Ronaldo Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, dolorem!</p>
-                            </div>
-                            </div>
-                            <div class="table-row">
-                            <div class="table-cell">
-                                <p>Gender:</p>
-                            </div>
-                            <div class="table-cell">
-                                <p>Cristiano Ronaldo</p>
-                            </div>
-                            </div>
-                            <div class="table-row">
-                            <div class="table-cell">
-                                <p>Date of Birth:</p>
-                            </div>
-                            <div class="table-cell">
-                                <p>Cristiano Ronaldo</p>
-                            </div>
-                            </div>
-                            <div class="table-row">
-                            <div class="table-cell">
-                                <p>Blood group:</p>
-                            </div>
-                            <div class="table-cell">
-                                <p>Cristiano Ronaldo</p>
-                            </div>
-                            </div>
-                            <div class="table-row">
-                            <div class="table-cell">
-                                <p>Mobile No:</p>
-                            </div>
-                            <div class="table-cell">
-                                <p>Cristiano Ronaldo</p>
-                            </div>
-                            </div>
-                            <div class="table-row">
-                            <div class="table-cell">
-                                <p>Email:</p>
-                            </div>
-                            <div class="table-cell">
-                                <p>Cristiano Ronaldo</p>
-                            </div>
-                            </div>
-                            <div class="table-row">
-                            <div class="table-cell">
-                                <p>Address:</p>
-                            </div>
-                            <div class="table-cell">
-                                <p>Cristiano Ronaldo</p>
+<div class="patientprofile">
+                <div class="row">
+                    <div class="col-md-4 box">
+                        <div class="well">
+                            <img src="../images/ronaldo.jpg" class="doc-img">
+                            <div class="btn-group">
                                 
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editimage"><i class="fa fa-picture-o"></i></button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editpass"><i class="fa fa-key"></i></button>
                             </div>
+                            <h3><?php echo $userRow['a_name']; ?></h3>
+                            <p></p>
                         </div>
                     </div>
-                    <div class="adminprofileedit">
-                        <a href="#modal" class="editadminprofile" data-tooltip="Edit Profile"><span class="material-icons">
-create
-</span></a>
+                
+               
+                    <div class="col-md-8 box">
+                        <h1>Personal Information</h1>
+                        <table class="table">
+                            
+                            <tbody>
+                                <tr>
+                                
+                                    <td>Username</td>
+                                    <td><?php echo $userRow['a_name']; ?></td>
+                               
+                                </tr>
+                                <tr>
+                                
+                                    <td>Hashed Password</td>
+                                    <td><?php echo $userRow['a_pass']; ?></td>
+                               
+                                </tr>
+                                
+                            </tbody>
+                        </table>
                     </div>
+                </div>
+
+                <div class="modal fade" id="editimage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Change Picture</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Picture</label>
+                            <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            
+                        </div>
+
                     
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" name="imgUpdate">Upload</button>
+                    </div>
+                    </form>
+                    </div>
                 </div>
-                <div class="modal-container" id="modal">
-                        
-                        <div class="modal" >
-                            <a href="#" class="close">x</a>
-                            <span class="modal-heading"><b> Edit Profile</b></span>
-                            <form action="#">
-                                <div class="table-box">
-                                    <div class="table-row">
-                                    <div class="table-cell">
-                                        <p>Username:</p>
-                                    </div>
-                                    <div class="table-cell">
-                                        <p>userName</p>
-                                    </div>
-                                    </div>
-                                    <div class="table-row">
-                                    <div class="table-cell">
-                                        <p>Change Image</p>
-                                    </div>
-                                    <div class="table-cell">
-                                        <input type="file" name="image" class="image" value="">
-                                    </div>
-                                    </div>
-                                    <div class="table-row">
-                                    <div class="table-cell">
-                                        <p>Name</p>
-                                    </div>
-                                    <div class="table-cell">
-                                    <input type="text" placeholder="Name" class="first-name" value="">
-                                    </div>
-                                    </div>
-                                    <div class="table-row">
-                                    <div class="table-cell">
-                                        <p>Gender</p>
-                                    </div>
-                                    <div class="tablecell">
-                                    <input type="radio" class="radio" name="gender" value="Male" > Male
-                                    <input type="radio" name="gender" class="radio" value="Female" > Female
-                                    <input type="radio" class="radio" name="gender" value="Others" > Others
-                                    </div>
-                                    </div>
-                                    <div class="table-row">
-                                    <div class="table-cell">
-                                        <p>Date of Birth </p>
-                                    </div>
-                                    <div class="table-cell">
-                                    <input type="date" name="date" class="date" value="">
-                                    </div>
-                                    </div>
-                                    <div class="table-row">
-                                    <div class="table-cell">
-                                        <p>Blood Group</p>
-                                    </div>
-                                    <div class="table-cell">
-                                    <select name="bloodgroup" id="" class="blood-group">
-                                    <option value="" disabled selected>Select your Blood group</option>
-                                    <option value="a+" >A+</option>
-                                    <option value="b+" >B+</option>
-                                    <option value="ab+" >AB+</option>
-                                    <option value="o+" >O+</option>
-                                    <option value="o-" >O-</option>
-                                    </select>
-                                    </div>
-                                    </div>
-                                    <div class="table-row">
-                                    <div class="table-cell">
-                                        <p>Mobile No.</p>
-                                    </div>
-                                    <div class="table-cell">
-                                    <input type="number" placeholder="Name" class="mobile" value="">
-                                        
-                                    </div>
-                                    </div>
-                                    <div class="table-row">
-                                    <div class="table-cell">
-                                        <p>E-mail</p>
-                                    </div>
-                                    <div class="table-cell">
-                                    <input type="email" placeholder="Name" class="email" value=""><br>
-                                        
-                                    </div>
-                                    </div>
-                                    <div class="table-row">
-                                    <div class="table-cell">
-                                        <p>Address</p>
-                                    </div>
-                                    <div class="table-cell">
-                                    <textarea  name="address" rows="2" cols="20"> </textarea>
-                                        
-                                    </div>
-                                    </div>
-                                </div>
-                                <a href="#"><input class="submit" type="button" name="submit" value="Submit" class="submit"> </a>
-                            </form>
-                        </div>  
+                </div>
+
+                <div class="modal fade" id="editpass" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                        <div class="form-group">
+                            <label for="password">Current Password</label>
+                            <input type="password" class="form-control" name="password" >  
+                        </div>
+                        <div class="form-group">
+                            <label for="nPassword">New Password</label>
+                            <input type="password" class="form-control" name="nPassword" >
+                        </div>
+                        <div class="form-group">
+                            <label for="cPassword">Confirm Password</label>
+                            <input type="password" class="form-control" name="cPassword">
+                        </div>
+                    
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" name="passUpdate">Update</button>
+                    </div>
+                    </form>
+                    </div>
+                </div>
                 </div>
             </div>
-            
-            </div>
-            
-        </div>
-        
-    </div> 
-     
-</body>
-</html>
+
+ <?php include ('../includes/footer.php');  ?>
