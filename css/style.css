@@ -4,11 +4,18 @@
   -webkit-box-sizing:border-box;
 }
 .blue {
-  background: #2abdfc;
+  background: #00BFA6;
   color: #fff;
 }
 .navbar {
   padding: 10px 10%;
+}
+.navbar  ul,li :hover{
+  color: #1b776b;
+
+}
+.navbarSupportedContent ul,li:hover{
+  color: #1b776b;
 }
 #logo {
   display: inline-block;
@@ -22,10 +29,9 @@
 }
 i{
   margin: 0 7px;
-  color: #ffffff;
+  color: #fff;
   
 }
-
 
 #sidebarCollapse {
   color: #fff;
@@ -34,7 +40,7 @@ i{
   margin: 0 10px;
 }
 #sidebarCollapse:hover {
-  color: #2abdfc;
+  color: #0ec5ad;
 
   outline: none;
 }
@@ -43,14 +49,13 @@ i{
   width: 100%;
   align-items: stretch;
   margin-top: 70px;
-  min-height: 90vh;
 }
 #sidebar {
   min-width: 250px;
   max-width: 250px;
-  background: #7386D5;
+  background: #0eccb3;
   color: #fff;
-  margin-top: -3%;
+  min-height: 90vh;
 
   transition: all 0.5s;
 }
@@ -60,8 +65,8 @@ margin-left: -250px;
 
 
 #sidebar ul.components{
-  margin-top: 30px;
-padding: 20px 0px;
+margin: 0px;
+padding: 0px;
 
 }
 
@@ -74,17 +79,17 @@ color: #fff;
 font-size: 1.1em;
 font-weight: bold;
 display: block;
-border-bottom: 2px solid #e9eaeb;
+border-bottom: 2px solid #00BFA6;
 }
 #sidebar ul li a:hover {
-  color: #7386D5;
-  background: #fff;
+  color: #08665a;
+  background: #16e0c5;
 }
 
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
   color: #fff;
-  background: #6d7fcc;
+  background: #00BFA6;
 }
 a[data-toggle="collapse"] {
   position: relative;
@@ -99,8 +104,8 @@ a[data-toggle="collapse"] {
 #sidebar ul li ul li a {
   font-size: 0.9em !important;
   padding-left: 50px !important;
-  background: #4b578d;
-  border-bottom: 0px solid #e9eaeb;
+  background: #057062;
+  border-bottom: 0px solid #00BFA6;
 }
 
 
@@ -155,7 +160,7 @@ a[data-toggle="collapse"] {
 
 }
 .patientprofile .btn-group button{
-  background: #4b578d;
+  background: #00BFA6;
   
   font-size: small;
   border: 0px solid black;
@@ -169,7 +174,7 @@ padding: 10px;
   
 }
 .patientprofile .btn-group button:hover{
-  background-color: darkcyan;
+  background-color: #108575;
 }
 .patientprofile .box{
   align-items: center;

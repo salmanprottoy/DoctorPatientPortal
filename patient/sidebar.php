@@ -1,27 +1,29 @@
 <div class="wrapper">
-        <nav id="sidebar">
-            <ul class="list-unstyled components">
-                
-                <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                    <i class="fa fa-user"></i><span> Profile</span></a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="patientInfo.php"><i class="fa fa-info-circle"></i><span> View Info</span></a>
-                        </li>
-                        <li>
-                            <a href="editInfo.php"><i class="fa fa-pencil-square-o" ></i><span> Edit Info</span></a>
-                        </li>
-                        <li>
-                            <a href="changePass.php"><i class="fa fa-key" ></i><span> Change Password</span></a>
-                        </li>
-                    </ul> 
-                </li>
-                
-                <li>
-                    <a href="Appointment.php"><i class="fas fa-calendar"></i><span> Appointment</span></a>
-                </li>
-                <li>
+   	<nav id="sidebar">
+   		
+   		
+   		
+   		<ul class="list-unstyled components">
+		   <li>
+   				<a href="dashboard.php"><i class="fa fa-tachometer"></i>Dashboard</a>
+			</li>
+			<li>
+                <a href="patientprofile.php"><i class="fa fa-user"></i><span> Profile</span></a>
+            </li>   
+   			<li class="active">
+   				<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+				<i class="fas fa-calendar"></i><span> Appointment</span></a>
+   				<ul class="collapse list-unstyled" id="homeSubmenu">
+   					<li>
+   						<a href="bookAppointment.php"><i class="fas fa-calendar"></i><span> Book Appointment</span></a>
+   					</li>
+   					<li>
+   						<a href="appointmentHistory.php"><i class="fa fa-history"></i><span> Appointment History</span></a>
+   					</li>
+   				</ul> 
+   			</li>
+   			
+   			<li>
                     <a href="Donation.php"><i class="fas fa-tint"></i><span>Organ Donation</span></a>
                 </li>
                 <li>
@@ -38,7 +40,10 @@
                             <a href="#">page3</a>
                         </li> -->
                     </ul> 
-                </li> 
-            </ul>   
-        </nav>
-        <div class="content">
+            </li>
+   		</ul>
+   		
+   		
+   	</nav>
+   	
+   	<div class="content">
