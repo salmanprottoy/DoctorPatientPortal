@@ -30,7 +30,7 @@
     crossorigin="anonymous"></script>
   <script src="../js/script.js"></script>
 
-  <title> Doctor-Patient Portal </title>
+  <title> Doctor Patient Portal </title>
 </head>
 
 <body>
