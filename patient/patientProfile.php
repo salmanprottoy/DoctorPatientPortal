@@ -63,7 +63,7 @@ $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
                                 <tr>
                                 
                                     <td>Blood Group</td>
-                                    <td><?php echo $userRow['p_bgroup']; ?></td>
+                                    <td><?php echo strtoupper($userRow['p_bgroup']); ?></td>
                                
                                 </tr>
                                 <tr>
@@ -75,7 +75,7 @@ $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
                                 
                                 <tr>
                                 
-                                    <td>First Name</td>
+                                    <td>Phone Number</td>
                                     <td><?php echo $userRow['p_phone']; ?></td>
                                
                                 </tr>
