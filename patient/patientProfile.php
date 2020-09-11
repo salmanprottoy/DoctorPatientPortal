@@ -7,12 +7,46 @@ include ('sidebar.php');
 
 
 if(!isset(	$_SESSION['user_name'])){
-    header("Location: ../login.php");
+    header("../login.php");
 }
+$username=$password=$nPassword=$fname=$lname=$dob=$bGroup=$email=$pNumber="";
 $user = $_SESSION['user_name'];
 $res = mysqli_query($conn,"SELECT * FROM `patient` WHERE `p_name` = '$user';" );
 $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
 
+$username=$userRow['p_name'];
+$password=$userRow['p_pass'];
+$fname=$userRow['p_fname'];
+$lname=$userRow['p_lname'];
+$dob=$userRow['p_dob'];
+$bGroup=$userRow['p_bgroup'];
+$email=$userRow['p_email'];
+$pNumber=$userRow['p_phone'];
+
+if(isset($_POST['imgUpdate']))
+{
+
+}
+if(isset($_POST['passUpdate']))
+{
+
+}
+
+if(isset($_POST['infoUpdate']))
+{
+    $query="UPDATE 'patient' SET p_fname='$_POST[fname]', p_lname='$_POST[lname]', p_dob='$_POST[dob]', p_bgroup='$_POST[bGroup]', p_email='$_POST[email]', p_phone='$_POST[pNumber]'
+    WHERE p_name=$user;";
+    echo 
+    $query_run=mysqli_query($conn, $query);
+    if($query_run)
+    {
+        echo'<script type=text/javaScript> alert("Data Updated") </script>';
+    }
+    else
+    {
+        echo'<script type=text/javaScript> alert("Something wrong data not updated!") </script>';
+    }
+}
 
 ?>
 
@@ -38,10 +72,6 @@ $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
                             
                             <tbody>
                                 <tr>
-                                    <td>Username</td>
-                                    <td><?php echo $userRow['p_name']; ?></td>
-                                </tr>
-                                <tr>
                                 
                                     <td>First Name</td>
                                     <td><?php echo $userRow['p_fname']; ?></td>
@@ -63,7 +93,7 @@ $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
                                 <tr>
                                 
                                     <td>Blood Group</td>
-                                    <td><?php echo $userRow['p_bgroup']; ?></td>
+                                    <td><?php echo strtoupper($userRow['p_bgroup']); ?></td>
                                
                                 </tr>
                                 <tr>
@@ -75,7 +105,7 @@ $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
                                 
                                 <tr>
                                 
-                                    <td>Phone</td>
+                                    <td>Phone Number</td>
                                     <td><?php echo $userRow['p_phone']; ?></td>
                                
                                 </tr>
@@ -89,26 +119,24 @@ $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
                 <div class="modal-dialog">
                     <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Change Picture</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                    <form>
+                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Name</label>
+                            <label for="exampleInputEmail1">Picture</label>
                             <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                             
                         </div>
-                        
-                       
-                        
+
                     
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" name="imgUpdate">Upload</button>
                     </div>
                     </form>
                     </div>
@@ -119,107 +147,84 @@ $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
                 <div class="modal-dialog">
                     <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                    <form>
+                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Name</label>
-                            <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            
+                            <label for="password">Current Password</label>
+                            <input type="password" class="form-control" name="password" >  
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Name</label>
-                            <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            
+                            <label for="nPassword">New Password</label>
+                            <input type="password" class="form-control" name="nPassword" >
                         </div>
-                       
-                        
+                        <div class="form-group">
+                            <label for="cPassword">Confirm Password</label>
+                            <input type="password" class="form-control" name="cPassword">
+                        </div>
                     
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" name="passUpdate">Update</button>
                     </div>
                     </form>
                     </div>
                 </div>
                 </div>
 
-
-
-
                 <div class="modal fade" id="editmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Update Information</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                    <form>
+                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Name</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"><?php echo $userRow['p_fname']; ?></input>
-                           
+                            <label>First Name</label>
+                            <input type="text" class="form-control" name="fname" value="<?php echo $fname; ?>">
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlSelect1">Type</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                            <label>Last Name</label>
+                            <input type="text" class="form-control" name="lname" value="<?php echo $lname; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label>Date of Birth</label>
+                            <input type="date" class="form-control" name="dob" value="<?php echo $dob; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label>Blood Group</label>
+                            <select class="form-control" name="bGroup">
+                                <option value="a+" <?php if($bGroup == "a+") echo "selected"; ?>>A+</option>
+                                <option value="a-" <?php if($bGroup == "a-") echo "selected"; ?>>A-</option>
+                                <option value="b+" <?php if($bGroup == "b+") echo "selected"; ?>>B+</option>
+                                <option value="b-" <?php if($bGroup == "b-") echo "selected"; ?>>B-</option>
+                                <option value="ab+" <?php if($bGroup == "ab+") echo "selected"; ?>>AB+</option>
+                                <option value="ab-" <?php if($bGroup == "ab-") echo "selected"; ?>>AB-</option>
+                                <option value="o+" <?php if($bGroup == "o+") echo "selected"; ?>>O+</option>
+                                <option value="o-" <?php if($bGroup == "o-") echo "selected"; ?>>O-</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlSelect2">Qualification</label>
-                            <select class="form-control" id="exampleFormControlSelect2">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            </select>
+                            <label>Email</label>
+                            <input type="text" class="form-control" name="email" value="<?php echo $email; ?>">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Visiting Hour</label>
-                            <div class="form-row">
-                                <div class="col">
-                                <input type="time" class="form-control" placeholder="First name">
-                                </div>
-                                <div class="col">
-                                <input type="time" class="form-control" placeholder="Last name">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Institution</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Contatc</label>
-                            <input type="number" class="form-control" id="exampleInputPassword1">
-                        </div>
-                       
-                        
-                    
+                            <label>Phone Number</label>
+                            <input type="text" class="form-control" name="pNumber" value="<?php echo $pNumber; ?>">
+                        </div>                  
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <input type="submit" class="btn btn-primary" name="infoUpdate" value="Update"></button>
                     </div>
                     </form>
                     </div>
