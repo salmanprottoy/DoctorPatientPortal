@@ -9,13 +9,16 @@ include ('sidebar.php');
 if(!isset(	$_SESSION['user_name'])){
     header("../login.php");
 }
-$username=$password=$nPassword=$fname=$lname=$dob=$bGroup=$email=$pNumber="";
+$username=$password=$cPassword=$nPassword=$fname=$lname=$dob=$bGroup=$email=$pNumber="";
+$passwordErr=$cPasswordErr=$nPasswordErr="";
+$hashPass="";
+$error=0;
 $user = $_SESSION['user_name'];
 $res = mysqli_query($conn,"SELECT * FROM `patient` WHERE `p_name` = '$user';" );
 $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
 
 $username=$userRow['p_name'];
-$password=$userRow['p_pass'];
+$dbPassword=$userRow['p_pass'];
 $fname=$userRow['p_fname'];
 $lname=$userRow['p_lname'];
 $dob=$userRow['p_dob'];
@@ -23,22 +26,82 @@ $bGroup=$userRow['p_bgroup'];
 $email=$userRow['p_email'];
 $pNumber=$userRow['p_phone'];
 
+    if(empty($_POST['password']))
+	{
+      $passwordErr = "Password cannot be empty!";
+      $error=1;
+	}
+	else
+	{
+      $password = mysqli_real_escape_string($conn, $_POST['password']);
+    }
+
+    if(empty($_POST['cPassword']))
+	{
+      $cPasswordErr = "Password cannot be empty!";
+      $error=1;
+    }
+	else
+	{
+      $cPassword = mysqli_real_escape_string($conn, $_POST['cPassword']);
+    }
+    if(empty($_POST['nPassword']))
+	{
+      $nPasswordErr = "Password cannot be empty!";
+      $error=1;
+    }
+	else
+	{
+      $nPassword = mysqli_real_escape_string($conn, $_POST['nPassword']);
+    }
+
+    if($cPassword==$nPassword)
+    {
+        if(password_verify($password, $dbPassword))
+        {
+            $hashPass=password_hash($cPassword, PASSWORD_DEFAULT);
+        }
+        else
+        {
+            $error=1;
+        }
+    }
+    else
+    {
+        $error=1;
+    }
+
+
+
 if(isset($_POST['imgUpdate']))
 {
 
 }
 if(isset($_POST['passUpdate']))
 {
+    if($error==0)
+    {
+        $query="UPDATE `patient` SET `p_pass`='$hashPass' WHERE `p_name` = '$user';";
+        $query_run=mysqli_query($conn, $query);
+        if($query_run)
+        {
+            echo'<script type=text/javaScript> alert("Password Updated") </script>';
+        }
+        else
+        {
+            echo'<script type=text/javaScript> alert("Something wrong Password not updated!") </script>';
+        }
+    }
 
+    else
+    {
+        echo'<script type=text/javaScript> alert("Something wrong Password not updated!") </script>';
+    }
 }
-
 if(isset($_POST['infoUpdate']))
 {
-    // $query="UPDATE 'patient' SET p_fname='$_POST[fname]', p_lname='$_POST[lname]', p_dob='$_POST[dob]', p_bgroup='$_POST[bGroup]', p_email='$_POST[email]', p_phone='$_POST[pNumber]'
-    // WHERE p_name='$user';";
 
     $query = "UPDATE `patient` SET `p_fname`='$_POST[fname]',`p_lname`='$_POST[lname]',`p_dob`='$_POST[dob]',`p_bgroup`='$_POST[bGroup]',`p_email`='$_POST[email]',`p_phone`='$_POST[pNumber]' WHERE `p_name` = '$user';";
-    
     $query_run=mysqli_query($conn, $query);
     if($query_run)
     {
