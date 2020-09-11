@@ -15,21 +15,27 @@
   margin-top: 7px;
   color: #fff;
 }
-#link {
+#link{
   color: #fff;
   font-weight: bold;
   margin: 0 10px;
 }
-i { margin: 0 7px; }
+i{
+  margin: 0 7px;
+  color: #ffffff;
+  
+}
+
+
 #sidebarCollapse {
   color: #fff;
   background: transparent;
-  outline: none;
+  outline: none !important;
   margin: 0 10px;
 }
 #sidebarCollapse:hover {
   color: #2abdfc;
-  background: #fff;
+
   outline: none;
 }
 .wrapper {
