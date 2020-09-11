@@ -7,6 +7,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link href="../css/style.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+      rel="stylesheet">
   <!-- FONTAWESOME : https://kit.fontawesome.com/a23e6feb03.js -->
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.  5/jquery.mCustomScrollbar.min.css">
@@ -26,7 +30,7 @@
     crossorigin="anonymous"></script>
   <script src="../js/script.js"></script>
 
-  <title>Sidebar + Navbar</title>
+  <title> Doctor-Patient Portal </title>
 </head>
 
 <body>

@@ -1,8 +1,18 @@
 <?php
-
+session_start();
 include ('../includes/header.php');
 include ('../includes/navbar.php');
 include ('../includes/patientsidebar.php');
+include ('../includes/db_connect.inc.php');
+
+
+if(!isset(	$_SESSION['user_name'])){
+    header("Location: ../login.php");
+}
+$user = $_SESSION['user_name'];
+ $res = mysqli_query($conn,"SELECT * FROM `patient` WHERE `p_name` = '$user';" );
+ $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
+
 
 ?>
 
@@ -12,10 +22,11 @@ include ('../includes/patientsidebar.php');
                         <div class="well">
                             <img src="../images/ronaldo.jpg" class="doc-img">
                             <div class="btn-group">
-                                <button class="btn btn-default">Change picture</button>
-                                <button class="btn btn-default">Change password</button>
+                                
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editimage"><i class="fa fa-picture-o"></i></button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editpass"><i class="fa fa-key"></i></button>
                             </div>
-                            <h3>UserName</h3>
+                            <h3><?php echo $userRow['p_fname']." ";echo $userRow['p_lname']; ?></h3>
                             <p>abcd at xyz </p>
                         </div>
                     </div>
@@ -70,10 +81,78 @@ include ('../includes/patientsidebar.php');
                                 </tr>
                             </tbody>
                         </table>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Launch demo modal</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editmodal"><i class="fa fa-pencil-square-o"></i></button>
                     </div>
                 </div>
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                <div class="modal fade" id="editimage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Name</label>
+                            <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            
+                        </div>
+                        
+                       
+                        
+                    
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                    </form>
+                    </div>
+                </div>
+                </div>
+
+                <div class="modal fade" id="editpass" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Name</label>
+                            <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Name</label>
+                            <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            
+                        </div>
+                       
+                        
+                    
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                    </form>
+                    </div>
+                </div>
+                </div>
+
+
+
+
+                <div class="modal fade" id="editmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                     <div class="modal-header">
