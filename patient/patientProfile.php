@@ -9,7 +9,8 @@ include ('sidebar.php');
 if(!isset(	$_SESSION['user_name'])){
     header("../login.php");
 }
-$username=$password=$nPassword=$fname=$lname=$dob=$bGroup=$email=$pNumber="";
+$username=$password=$nPassword=$fname=$lname=$dob=$bGroup=$email=$pNumber=$pPic="";
+$file =  $files = $filename =$filetmp=$fileext=$filecheck=$fileextstored=$destinationfile=$fileError=$fileerror= "";
 $user = $_SESSION['user_name'];
 $res = mysqli_query($conn,"SELECT * FROM `patient` WHERE `p_name` = '$user';" );
 $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
@@ -22,11 +23,57 @@ $dob=$userRow['p_dob'];
 $bGroup=$userRow['p_bgroup'];
 $email=$userRow['p_email'];
 $pNumber=$userRow['p_phone'];
+$pPic = $userRow['p_pic'];
 
 if(isset($_POST['imgUpdate']))
 {
+    if(!empty($_FILES['file']['name']))
+    {
+          
+        $file = $_FILES['file'];
+        $filename = $file['name'];
+        
+        $fileerror = $file['error'];
+        $filetmp = $file['tmp_name'];
 
+        $fileext = explode('.' , $filename);
+        $filecheck = strtolower(end($fileext));
+
+        $fileextstored = array('png' , 'jpg' , 'jpeg');
+        if(in_array($filecheck , $fileextstored))
+            {
+                // echo "file inserted";
+                $destinationfile = '../images/'.$filename;
+                move_uploaded_file($filetmp , $destinationfile);
+                $query = "UPDATE `patient` SET `p_pic`='$destinationfile' WHERE `p_name` = '$user';";
+                                    $query_run=mysqli_query($conn, $query);
+                                    if($query_run)
+                                    {
+                                        echo'<script type=text/javaScript> alert("Data Updated") </script>';
+                                    }
+                                    else
+                                    {
+                                        echo'<script type=text/javaScript> alert("Something wrong data not updated!") </script>';
+                                    }
+
+            }
+            else
+            {
+                // echo "select an IMAGE";
+                echo'<script type=text/javaScript> alert("select an IMAGE") </script>';
+            }   
+       
+    }
+
+    else
+    {
+        // $fileError = "Nothing is selected in imgae";
+        echo'<script type=text/javaScript> alert("Nothing is selected in imgae") </script>';
+    }
 }
+
+
+
 if(isset($_POST['passUpdate']))
 {
 
@@ -56,7 +103,7 @@ if(isset($_POST['infoUpdate']))
                 <div class="row">
                     <div class="col-md-4 box">
                         <div class="well">
-                            <img src="../images/ronaldo.jpg" class="doc-img">
+                            <img src="<?php echo $userRow['p_pic']; ?> " class="doc-img">
                             <div class="btn-group">
                                 
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editimage"><i class="fa fa-picture-o"></i></button>
@@ -116,35 +163,39 @@ if(isset($_POST['infoUpdate']))
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editmodal"><i class="fa fa-pencil-square-o"></i></button>
                     </div>
                 </div>
-
-                <div class="modal fade" id="editimage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- ---------------------------------------editimage------------------------------------------------- -->
+                <div class="modal fadeInDown" id="editimage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Change Picture</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Picture</label>
-                            <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Change Picture</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
+                        <div class="modal-body">
+                            <form action="patientprofile.php" method="POST" enctype = "multipart/form-data"> 
+                                <div class="form-group">
+                                    <label for="file" >Image:</label>
+                                    <input type="file" name="file" id="file" value="<?php echo $file;?>" class="form-control">
+                                    <!-- <div class="alert alert-warning alert-dismissable fade show" >
+                                        <strong><i class="fa fa-warning"></i><?php echo $fileError; ?></strong>
+                                        <button class="close" type="button" data-dismiss="alert"> &times; </button>
+                                    </div> -->
+                                </div>
 
-                    
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" name="imgUpdate">Upload</button>
-                    </div>
-                    </form>
+                                
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    
+                                    <input type="submit" class="btn btn-primary" name="imgUpdate" value="Update"></button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-                </div>
-
+<!-- -----------------------------editpass--------------------------------------------------- -->
                 <div class="modal fade" id="editpass" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -178,7 +229,7 @@ if(isset($_POST['infoUpdate']))
                     </div>
                 </div>
                 </div>
-
+<!-- Editmodal-------------------------------------------------------------------------------- -->
                 <div class="modal fade" id="editmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
