@@ -94,6 +94,9 @@ if(isset($_POST['passUpdate']))
         echo'<script type=text/javaScript> alert("Something wrong Password not updated!") </script>';
     }
 }
+
+
+// -------------------------imgUodate----------------------------------//
 if(isset($_POST['imgUpdate']))
 {
     if(!empty($_FILES['file']['name']))
@@ -141,7 +144,7 @@ if(isset($_POST['imgUpdate']))
     }
 }
 
-
+// ----------------------------------------infoUpdate----------------------------------------//
 if(isset($_POST['infoUpdate']))
 {
     // $query="UPDATE 'patient' SET p_fname='$_POST[fname]', p_lname='$_POST[lname]', p_dob='$_POST[dob]', p_bgroup='$_POST[bGroup]', p_email='$_POST[email]', p_phone='$_POST[pNumber]'
@@ -172,14 +175,17 @@ if(isset($_POST['infoUpdate']))
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editimage"><i class="fa fa-picture-o"></i></button>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editpass"><i class="fa fa-key"></i></button>
                             </div>
-                            <h3><?php echo $userRow['p_fname']." ";echo $userRow['p_lname']; ?></h3>
+                            <h3><?php echo $userRow['p_name']; ?></h3>
                             <p></p>
                         </div>
                     </div>
                 
                
                     <div class="col-md-8 box">
-                        <h1>Personal Information</h1>
+                    <h1 class="text-white bg-dark text-center">
+            Personal Information
+
+        </h1>
                         <table class="table">
                             
                             <tbody>
@@ -238,9 +244,10 @@ if(isset($_POST['infoUpdate']))
                         </div>
                         <div class="modal-body">
                             <form action="patientprofile.php" method="POST" enctype = "multipart/form-data"> 
-                                <div class="form-group">
-                                    <label for="file" >Image:</label>
-                                    <input type="file" name="file" id="file" value="<?php echo $file;?>" class="form-control">
+                                <div class="form-group ">
+                                    <!-- <img src="../images/placeholder.png" onclick="triggerClick()" id="profileDisplay"><br> -->
+                                    <label for="file" >Image</label>
+                                    <input type="file" name="file" id="file"  value="<?php echo $file;?>" class="form-control">
                                     <!-- <div class="alert alert-warning alert-dismissable fade show" >
                                         <strong><i class="fa fa-warning"></i><?php echo $fileError; ?></strong>
                                         <button class="close" type="button" data-dismiss="alert"> &times; </button>

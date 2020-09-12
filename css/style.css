@@ -152,13 +152,19 @@ a[data-toggle="collapse"] {
   height: 70%;
   border-radius: 50%;
   position: relative;
-  
+  object-fit: cover;
+margin-top: 65px;
+margin-left: 50px;
+}
+.patientprofile .well h3{
+  text-align: center;
 }
 .patientprofile  .btn-group{
   margin: 30px;
+  margin-left: 90px;
   border-radius: 50%;
   align-items: center;
-
+text-align: center;
 }
 .patientprofile .btn-group button{
   background: #00BFA6;
@@ -196,4 +202,16 @@ padding: 10px;
   float: right;
   
   font-size: larger;
+}
+
+/* #profileDisplay{
+  display: block;
+  width: 100%;
+  margin: 10px auto;
+  border-radius: 50%;
+} */
+
+/* -----------------doctorlist------------------- */
+.doctorlist .card{
+  display: flex;
 }

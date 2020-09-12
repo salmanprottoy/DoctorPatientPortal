@@ -114,7 +114,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 		 	 	if(password_verify($password, $uPassInDB))
 		 	 	{
 					$_SESSION["user_name"] = $username;
-					header("Location: ./patient");
+					header("Location: patient/dashboard.php");
 		 		 }
 		  		else
 		  		{
