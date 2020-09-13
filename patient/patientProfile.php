@@ -191,39 +191,45 @@ if(isset($_POST['infoUpdate']))
                             <tbody>
                                 <tr>
                                 
-                                    <td>First Name</td>
+                                    <td class="tdattribute">First Name</td>
+                                    <td>:</td>
                                     <td><?php echo $userRow['p_fname']; ?></td>
                                
                                 </tr>
                                 <tr>
                                 
-                                    <td>Last Name</td>
+                                    <td class="tdattribute">Last Name</td>
+                                    <td>:</td>
                                     <td><?php echo $userRow['p_lname']; ?></td>
                                
                                 </tr>
                                 
                                 <tr>
                                 
-                                    <td>Date of Birth</td>
+                                    <td class="tdattribute">Date of Birth</td>
+                                    <td>:</td>
                                     <td><?php echo $userRow['p_dob']; ?></td>
                                
                                 </tr>
                                 <tr>
                                 
-                                    <td>Blood Group</td>
+                                    <td class="tdattribute">Blood Group</td>
+                                    <td>:</td>
                                     <td><?php echo strtoupper($userRow['p_bgroup']); ?></td>
                                
                                 </tr>
                                 <tr>
                                 
-                                    <td>Email</td>
+                                    <td class="tdattribute">Email</td>
+                                    <td>:</td>
                                     <td><?php echo $userRow['p_email']; ?></td>
                                
                                 </tr>
                                 
                                 <tr>
                                 
-                                    <td>Phone Number</td>
+                                    <td class="tdattribute">Phone Number</td>
+                                    <td>:</td>
                                     <td><?php echo $userRow['p_phone']; ?></td>
                                
                                 </tr>

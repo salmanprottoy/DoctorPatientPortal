@@ -197,6 +197,9 @@ padding: 10px;
 .patientprofile .box .table tbody tr td {
   border-top: none;
 }
+.patientprofile .box .table tbody tr .tdattribute{
+  text-align: right;
+}
 .patientprofile .box button{
   border-radius: 50%;
   float: right;
@@ -214,4 +217,8 @@ padding: 10px;
 /* -----------------doctorlist------------------- */
 .doctorlist .card{
   display: flex;
+}
+
+#breadcrumb{
+  background: none !important;
 }

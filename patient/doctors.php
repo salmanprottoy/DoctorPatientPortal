@@ -13,7 +13,7 @@ $query_run = mysqli_query($conn , $query);
 
 <div class="doctorlist">
 <nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
+  <ol class="breadcrumb" id="breadcrumb">
     <li class="breadcrumb-item"><a href="#">Patient</a></li>
     <li class="breadcrumb-item active" aria-current="page">Doctor List</li>
   </ol>
@@ -31,12 +31,11 @@ $query_run = mysqli_query($conn , $query);
                     foreach($query_run as $rows)
                     {
 
-                //     }
-                // }
+               
             ?>
             <div class="col-md-4">
                 <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="<?php echo $rows['p_pic'];?>" alt="Card image cap">
+                    <img class="card-img-top" src="<?php echo $rows['p_pic'];?>" alt="Card image cap" style="width: 18rem; height: 9rem; object-fit:cover;">
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $rows['p_fname']; ?> <?php echo $rows['p_lname']; ?></h5>
                         <p class="card-text"><?php echo $rows['p_email']; ?><br><?php echo $rows['p_email']; ?><br><?php echo $rows['p_email']; ?></p>
