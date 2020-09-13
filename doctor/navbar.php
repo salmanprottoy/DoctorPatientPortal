@@ -3,7 +3,7 @@
         <i class="fas fa-lg fa-bars"></i>
         </button>
         <a class="navbar-brand" href="index.php">
-        <h3 id="logo"><i class="fa fa-heartbeat" aria-hidden="true"></i><span> Doctor Portal</span></h3>
+        <img src="../images/logo1.png" id="logo" alt="">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,7 +17,20 @@
                 <i class="fas fa-sign-out-alt"></i>
                 LogOut<span class="sr-only">(current) </span></a>
             </li>
-
+            <!-- <li class="nav-item">
+            <a class="nav-link" id="link" href="#">
+                <i class="fas fa-id-card"></i>Contact Us</a>
+            </li> -->
+            <!-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+            </div> -->
         </li>
         </ul>
         </div>
