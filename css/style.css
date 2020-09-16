@@ -57,8 +57,9 @@ i{
   background: #0eccb3;
   color: #fff;
   min-height: 90vh;
-
+position: fixed;
   transition: all 0.5s;
+  z-index: 1;
 }
 #sidebar.active{
 margin-left: -250px;
@@ -138,11 +139,20 @@ a[data-toggle="collapse"] {
   }
 }
 
+@media (min-width:800px) {
+  #sidebar {
+    margin-left: -250px; 
+  }
+  #sidebar.active{
+    margin-left: 0px;
+  }
+}
+
 /* -----------patientprofile--------------------- */
 .patientprofile{
   margin: 10px;
 }
-.patientprofile .well{
+.profile .well{
   align-content: center;
   vertical-align: middle;
 }
@@ -207,6 +217,9 @@ padding: 10px;
   font-size: larger;
 }
 
+.clockpicker-popover {
+  z-index: 999999 !important;
+  }
 /* #profileDisplay{
   display: block;
   width: 100%;
@@ -222,3 +235,18 @@ padding: 10px;
 #breadcrumb{
   background: none !important;
 }
+.doctorlist #searchbox{
+  float: right;
+}
+
+.active-cyan-2 input.form-control[type=text]:focus:not([readonly]) {
+  border-bottom: 1px solid #4dd0e1;
+  box-shadow: 0 1px 0 0 #4dd0e1;
+}
+.active-cyan input.form-control[type=text] {
+  border-bottom: 1px solid #4dd0e1;
+  box-shadow: 0 1px 0 0 #4dd0e1;
+}
+
+
+ 

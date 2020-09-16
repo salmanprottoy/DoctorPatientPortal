@@ -28,10 +28,15 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
-  <script src="../js/script.js"></script>
+  <script src="../js/script.js" ></script>
+  <link rel="stylesheet" type="text/css" href="../css/jquery-clockpicker.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="../js/jquery-clockpicker.min.js"></script>
+
+  
 
   <title> Doctor Patient Portal </title>
-  <link rel="shortcut icon" type="image/png" href="../images/logo1.png">
+  <link rel="shortcut icon" type="image/png" href="../images/logo2.png">
 </head>
 
 <body>

@@ -3,7 +3,7 @@ session_start();
 include ('../includes/db_connect.inc.php');
 include ('../includes/header.php');
 include ('navbar.php');
-include ('sidebar.php');
+
 
 
 if(!isset(	$_SESSION['user_name'])){
@@ -82,6 +82,7 @@ if(isset($_POST['passUpdate']))
         if($query_run)
         {
             echo'<script type=text/javaScript> alert("Password Updated") </script>';
+            header('Location: '.$_SERVER['PHP_SELF']); 
         }
         else
         {
@@ -115,13 +116,15 @@ if(isset($_POST['imgUpdate']))
         if(in_array($filecheck , $fileextstored))
             {
                 // echo "file inserted";
-                $destinationfile = '../images/'.$filename;
+                $new_name = rand() . "." . $filecheck;
+                $destinationfile = '../images/'.$new_name;
                 move_uploaded_file($filetmp , $destinationfile);
                 $query = "UPDATE `patient` SET `p_pic`='$destinationfile' WHERE `p_name` = '$user';";
                                     $query_run=mysqli_query($conn, $query);
                                     if($query_run)
                                     {
                                         echo'<script type=text/javaScript> alert("Data Updated") </script>';
+                                        header('Location: '.$_SERVER['PHP_SELF']); 
                                     }
                                     else
                                     {
@@ -147,22 +150,27 @@ if(isset($_POST['imgUpdate']))
 // ----------------------------------------infoUpdate----------------------------------------//
 if(isset($_POST['infoUpdate']))
 {
-    // $query="UPDATE 'patient' SET p_fname='$_POST[fname]', p_lname='$_POST[lname]', p_dob='$_POST[dob]', p_bgroup='$_POST[bGroup]', p_email='$_POST[email]', p_phone='$_POST[pNumber]'
-    // WHERE p_name='$user';";
+   
 
     $query = "UPDATE `patient` SET `p_fname`='$_POST[fname]',`p_lname`='$_POST[lname]',`p_dob`='$_POST[dob]',`p_bgroup`='$_POST[bGroup]',`p_email`='$_POST[email]',`p_phone`='$_POST[pNumber]' WHERE `p_name` = '$user';";
     
     $query_run=mysqli_query($conn, $query);
+   
+
     if($query_run)
     {
-        echo'<script type=text/javaScript> alert("Data Updated") </script>';
+        echo'<script type=text/javaScript> alert("Data Updated") ; </script>';
+        
+        
+        header('Location: '.$_SERVER['PHP_SELF']); 
     }
     else
     {
         echo'<script type=text/javaScript> alert("Something wrong data not updated!") </script>';
     }
+     
 }
-
+include ('sidebar.php');
 ?>
 
 <div class="patientprofile">
@@ -249,7 +257,7 @@ if(isset($_POST['infoUpdate']))
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="patientprofile.php" method="POST" enctype = "multipart/form-data"> 
+                            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype = "multipart/form-data"> 
                                 <div class="form-group ">
                                     <!-- <img src="../images/placeholder.png" onclick="triggerClick()" id="profileDisplay"><br> -->
                                     <label for="file" >Image</label>
@@ -353,7 +361,7 @@ if(isset($_POST['infoUpdate']))
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input type="submit" class="btn btn-primary" name="infoUpdate" value="Update"></button>
+                        <input type="submit" class="btn btn-primary"  id=btn_update name="infoUpdate" value="Update">
                     </div>
                     </form>
                     </div>
@@ -361,4 +369,9 @@ if(isset($_POST['infoUpdate']))
                 </div>
             </div>
 
- <?php include ('../includes/footer.php');  ?>
+            </div>
+    </div>
+
+    
+</body>
+</html>

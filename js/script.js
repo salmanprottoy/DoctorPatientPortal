@@ -5,20 +5,27 @@ $(document).ready(function() {
       $('a[aria-expanded=true]').attr('aria-expanded', 'false');
       document.getElementById("bodyContent").style.width="100%";
     });
+
+
+    
+    
+    
 });
 
 
-function triggerClick(){
-  document.querySelector('#profileImage').click();
-}
+// function triggerClick(){
+//   document.querySelector('#profileImage').click();
+// }
 
-function displayImage(e){
-  if(e.files[0]){
-    var reader = new FileReader();
+// function displayImage(e){
+//   if(e.files[0]){
+//     var reader = new FileReader();
 
-    reader.onload = function(e){
-      document.querySelector('#profileDisplay').setAttribute('src',e.target.result);
-    }
-    reader.readAsDataURL(e.files[0]);
-  }
-}
+//     reader.onload = function(e){
+//       document.querySelector('#profileDisplay').setAttribute('src',e.target.result);
+//     }
+//     reader.readAsDataURL(e.files[0]);
+//   }
+// }
+
+
