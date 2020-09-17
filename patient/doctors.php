@@ -110,15 +110,49 @@ $query_run = mysqli_query($conn , $query);
                     </div>
                 </div><br>
             </div> -->
+         
+            
+            <table cellpadding="10" class="table table-hover table-centered" id="myTable">
+            <div class="row ">
+            <div class="col-md-6">
+            <?php
 
-            <!-- <table cellpadding="10">
+if($query_run)
+{
+    foreach($query_run as $rows)
+    {
+
+
+?>
+            
                 <tr>
-                    <td></td>
+                    <td ><img class="card-img" src="<?php echo $rows['p_pic'];?>" alt="Card image cap" style="width: 18rem; height: 9rem;display: block;
+  margin-left: auto;
+  margin-right: 10px;
+   object-fit:cover;"></td>
+                    <td><strong><?php echo $rows['p_fname']; ?> <?php echo $rows['p_lname']; ?></strong><br>
+                    <?php echo $rows['p_bgroup']; ?><br>
+                    <?php echo $rows['p_email']; ?><br>
+                     <a href="#" class="btn btn-primary">Details</a>&nbsp; <a href="#" class="btn btn-primary">Make Appointment</a></td>
                 </tr>
+              
+                <?php
 
-            </table> -->
+}
+}
+else
+{
+echo "No records found";
+}            
 
-            <table class="table" id="myTable">
+?>
+             </div>
+            </div>
+            </table>
+           
+        
+
+            <!-- <table class="table" id="myTable">
                 <thead>
                     <tr>
                
@@ -128,15 +162,7 @@ $query_run = mysqli_query($conn , $query);
                     <th scope="col">Image</th>
                     </tr>
                 </thead>
-                <?php
-
-                if($query_run)
-                {
-                    foreach($query_run as $rows)
-                    {
-
                
-            ?>
                 <tbody>
                     <tr>
                     
@@ -148,30 +174,41 @@ $query_run = mysqli_query($conn , $query);
                     
                 </tbody>
             
-            <?php
-
-                    }
-                }
-                else
-                {
-                    echo "No records found";
-                }            
-            
-            ?>
-            </table>
-        </div>
+          
+            </table> -->
+        
         </div>
     </div>
 <script>
+    // function searchFun(){
+    //     var filter = document.getElementById('myInput').value.toUpperCase();
+    //     var myTable = document.getElementById('myTable');
+    //     var tr = myTable.getElementsByTagName('tr');
+
+    //     for(var i=0 ; i<tr.length ; i++){
+    //         var td = tr[i].getElementsByTagName('td')[1];
+    //         if(td){
+    //             var text_value = td.textContent || td.innerHTML;
+    //             if(text_value.toUpperCase().indexOf(filter) > -1){
+    //                 tr[i].style.display = "";
+    //             }
+    //             else{
+    //                 tr[i].style.display = "none";
+    //             }
+    //         }
+    //     }
+    // }
+
     function searchFun(){
         var filter = document.getElementById('myInput').value.toUpperCase();
         var myTable = document.getElementById('myTable');
         var tr = myTable.getElementsByTagName('tr');
 
         for(var i=0 ; i<tr.length ; i++){
-            var td = tr[i].getElementsByTagName('td')[0];
+            var td = tr[i].getElementsByTagName('strong');
+         
             if(td){
-                var text_value = td.textContent || td.innerHTML;
+                var text_value =  td[0].innerHTML;
                 if(text_value.toUpperCase().indexOf(filter) > -1){
                     tr[i].style.display = "";
                 }
