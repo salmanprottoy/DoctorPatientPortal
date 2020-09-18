@@ -132,7 +132,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 				  values('$username', '$uPassInDB','$fname','$lname', '$dob', '$bGroup', '$email', '$pNumber');";
 
 				  mysqli_query($conn, $sqlInsert);
-				  $regSuccessful = "Registration was successful";
+				  $regSuccessful = "Registration  successful";
 				  header("Location: ./login.php");
 			  }
 		}

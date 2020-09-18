@@ -102,6 +102,7 @@ a[data-toggle="collapse"] {
   top: 50%;
   right: 20px;
   transform: translateY(-50%);
+  transition: all 0.5s;
 }
 #sidebar ul li ul li a {
   font-size: 0.9em !important;
@@ -255,4 +256,9 @@ padding: 10px;
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+ }
+
+ .patientprofile .donor{
+   align-items: center;
+
  }

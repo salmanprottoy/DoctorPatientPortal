@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_name'])) {
 }
 $username = $password = $cPassword = $nPassword = $fname = $lname = $dob = $bGroup = $email = $pNumber = $pPic = "";
 $passwordErr = $cPasswordErr = $nPasswordErr = "";
-$file =  $files = $filename = $filetmp = $fileext = $filecheck = $fileextstored = $destinationfile = $fileError = $fileerror = "";
+$file =  $files = $filename = $filetmp = $fileext = $filecheck = $fileextstored = $destinationfile = $fileError = $fileerror =$msg= "";
 $hashPass = "";
 $error = 0;
 $user = $_SESSION['user_name'];
@@ -103,11 +103,13 @@ if (isset($_POST['imgUpdate'])) {
             }
         } else {
             // echo "select an IMAGE";
+          //  $msg = "Select an Image";
             echo '<script type=text/javaScript> alert("select an IMAGE") </script>';
         }
     } else {
         // $fileError = "Nothing is selected in imgae";
-        echo '<script type=text/javaScript> alert("Nothing is selected in imgae") </script>';
+       echo '<script type=text/javaScript> alert("Nothing is selected in imgae") </script>';
+       //$msg = "Nothing is selected in imgae";
     }
 }
 
@@ -223,6 +225,7 @@ include('sidebar.php');
                             <div class="form-group form-centerd">
                                 <img src="<?php echo $userRow['p_pic']; ?> " onclick="triggerClick()" id="profileDisplay" style="width: 15rem; height: 15rem;display: block;border-radius:50%;"><br>
                                 <label for="file">Image</label>
+                                <span class="error"> <?php echo $msg; ?></span>
                                 <!-- <input type="file" name="file" id="file" value="<?php echo $file; ?>" class="form-control"> -->
                                 <input type="file" name="file" onchange="displayImage(this)" id="file" style="display:none;">
 
@@ -235,7 +238,7 @@ include('sidebar.php');
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
-                    <input type="submit" class="btn btn-primary" name="imgUpdate" value="Update"></button>
+                    <input type="submit" class="btn btn-primary" name="imgUpdate" value="Update">
                 </div>
                 </form>
             </div>

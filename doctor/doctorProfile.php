@@ -259,10 +259,7 @@ include('sidebar.php');
                             <!-- <img src="../images/placeholder.png" onclick="triggerClick()" id="profileDisplay"><br> -->
                             <label for="file">Image</label>
                             <input type="file" name="file" id="file" value="<?php echo $file; ?>" class="form-control">
-                            <!-- <div class="alert alert-warning alert-dismissable fade show" >
-                                        <strong><i class="fa fa-warning"></i><?php echo $fileError; ?></strong>
-                                        <button class="close" type="button" data-dismiss="alert"> &times; </button>
-                                    </div> -->
+                           
                         </div>
 
 
