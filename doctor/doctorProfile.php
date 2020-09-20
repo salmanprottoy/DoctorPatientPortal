@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_name'])) {
     header("../login.php");
 }
 $username = $password = $cPassword = $nPassword = $fname = $lname = $dob = $bGroup = $email = $pNumber = $pPic = "";
-$passwordErr = $cPasswordErr = $nPasswordErr = "";
+$passwordErr = $cPasswordErr = $nPasswordErr = $visitstartedit = $visitendedit = $visitstarterror = $visitenderror = $visiterror = "";
 $file =  $files = $filename = $filetmp = $fileext = $filecheck = $fileextstored = $destinationfile = $fileError = $fileerror = "";
 $hashPass = "";
 $error = 0;
@@ -29,7 +29,7 @@ $pNumber = $userRow['d_phone'];
 $dept = $userRow['d_department'];
 $qualification = $userRow['d_qualification'];
 $inst = $userRow['d_institution'];
- $visitstart = $userRow['d_visitstart'];
+$visitstart = $userRow['d_visitstart'];
 // $visitstart = time("h:i A", strtotime($userRow['d_visitstart']));
 
 $visitend = $userRow['d_visitend'];
@@ -64,6 +64,10 @@ if ($cPassword == $nPassword) {
 } else {
     $error = 1;
 }
+
+
+
+
 
 if (isset($_POST['passUpdate'])) {
     if ($error == 0) {
@@ -120,16 +124,36 @@ if (isset($_POST['imgUpdate'])) {
 
 // ----------------------------------------infoUpdate----------------------------------------//
 if (isset($_POST['infoUpdate'])) {
-
-
-    $query = "UPDATE `doctor` SET `d_fname`='$_POST[fname]',`d_lname`='$_POST[lname]',`d_dob`='$_POST[dob]',`d_bgroup`='$_POST[bGroup]',`d_email`='$_POST[email]',`d_phone`='$_POST[pNumber]' ,`d_department`='$_POST[dept]',`d_qualification`='$_POST[qualification]',`d_institution`='$_POST[inst]',`d_visitstart`='$_POST[visitstart]',`d_visitend`='$_POST[visitend]' WHERE `d_name` = '$user';";
-
-    $query_run = mysqli_query($conn, $query);
-    if ($query_run) {
-        echo '<script type=text/javaScript> alert("Data Updated") </script>';
-        header('Location: ' . $_SERVER['PHP_SELF']);
+    if (empty($_POST['visitstartedit'])) {
+        $visitstarterror = "Select Starting time of visiting Hour";
+        $error = 1;
     } else {
-        echo '<script type=text/javaScript> alert("Something wrong data not updated!") </script>';
+        $visitstartedit = $_POST['visitstartedit'];
+    }
+    if (empty($_POST['visitendedit'])) {
+        $visitenderror = "Select Ending time of visiting Hour";
+        $error = 1;
+    } else {
+        $visitendedit = $_POST['visitendedit'];
+    }
+   
+    if (!empty($_POST['visitstartedit']) && !empty($_POST['visitendedit'])) {
+        $query = "UPDATE `doctor` SET `d_fname`='$_POST[fname]',`d_lname`='$_POST[lname]',`d_dob`='$_POST[dob]',`d_bgroup`='$_POST[bGroup]',`d_email`='$_POST[email]',`d_phone`='$_POST[pNumber]' ,`d_department`='$_POST[dept]',`d_qualification`='$_POST[qualification]',`d_institution`='$_POST[inst]',`d_visitstart`='$_POST[visitstartedit]',`d_visitend`='$_POST[visitendedit]' WHERE `d_name` = '$user';";
+
+        if ($_POST['visitstartedit'] < $_POST['visitendedit']) {
+            $query_run = mysqli_query($conn, $query);
+            if ($query_run) {
+                echo '<script type=text/javaScript> alert("Data Updated") </script>';
+                header('Location: ' . $_SERVER['PHP_SELF']);
+            } else {
+                echo '<script type=text/javaScript> alert("Something wrong data not updated!") </script>';
+            }
+        }else{
+         
+            echo '<script type=text/javaScript> alert("Visiting Hour Incorrect...Profile not updated!") </script>'; 
+        }
+    }else{
+        echo '<script type=text/javaScript> alert(" not updated!") </script>'; 
     }
 }
 include('sidebar.php');
@@ -259,7 +283,7 @@ include('sidebar.php');
                             <!-- <img src="../images/placeholder.png" onclick="triggerClick()" id="profileDisplay"><br> -->
                             <label for="file">Image</label>
                             <input type="file" name="file" id="file" value="<?php echo $file; ?>" class="form-control">
-                           
+
                         </div>
 
 
@@ -368,12 +392,15 @@ include('sidebar.php');
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Visiting Hour Start</label>
-                                    <input type="time" class="form-control" name="visitstart" value="<?php echo  $visitstart; ?>">
+                                    <input type="time" class="form-control" name="visitstartedit" value="<?php echo  $visitstart; ?>">
+                                    <span class="error"><?php echo $visitstarterror; ?></span>
                                 </div>
                                 <div class="col-md-6">
                                     <label>Visiting Hour End</label>
-                                    <input type="time" class="form-control" name="visitend" value="<?php echo $visitend ?>"/>
+                                    <input type="time" class="form-control" name="visitendedit" value="<?php echo $visitend ?>" />
+                                    <span class="error"><?php echo $visitenderror; ?></span>
                                 </div>
+                                <span class="error"><?php echo $visiterror; ?></span>
                             </div>
                         </div>
                         <div class="form-group clockpicker">
