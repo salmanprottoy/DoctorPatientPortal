@@ -14,9 +14,9 @@
 				<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
 					<i class="fas fa-calendar"></i><span> Appointment</span></a>
 				<ul class="collapse list-unstyled" id="homeSubmenu">
-				<li>
+				<!-- <li>
 						<a href="createAppointment.php"><i class="fa fa-calendar-plus-o"></i><span> Create Appointment</span></a>
-					</li>
+					</li> -->
 					<li>
 						<a href="viewAppointment.php"><i class="fa fa-calendar-plus-o"></i><span> View Appointment</span></a>
 					</li>

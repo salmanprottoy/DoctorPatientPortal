@@ -41,7 +41,7 @@ if (isset($_POST['donorreg'])) {
             echo '<script type=text/javaScript> alert("Data Updated") ; </script>';
 
 
-            header('Location: ' . $_SERVER['PHP_SELF']);
+            //header('Location: ' . $_SERVER['PHP_SELF']);
         } else {
             echo '<script type=text/javaScript> alert("Something wrong data not updated!") </script>';
         }
@@ -67,7 +67,7 @@ include('sidebar.php');
                 </div>
                 <div class="form-group">
                     <label>Donor Name</label>
-                    <input type="text" class="form-control" name="fname" readonly value="<?php echo $userRow['d_fname']; ?> &nbsp; <?php echo $userRow['d_lname']; ?>">
+                    <input type="text" class="form-control" name="fname" readonly value="<?php echo $userRow['d_fname']; ?> <?php echo $userRow['d_lname']; ?>">
 
                 </div>
                 <!-- <div class="form-group">
@@ -76,7 +76,7 @@ include('sidebar.php');
                 </div> -->
                 <div class="form-group">
                     <label>Donor Contact No</label>
-                    <input type="number" class="form-control" name="mobile" readonly value="<?php echo $userRow['d_phone']; ?>">
+                    <input type="text" class="form-control" name="mobile" readonly value="<?php echo $userRow['d_phone']; ?>">
                 </div>
                 <div class="form-group">
                     <label>Donor Email</label>

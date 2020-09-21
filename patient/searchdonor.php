@@ -53,19 +53,10 @@ $query_run = mysqli_query($conn, $query);
 
         <input type="text" name="" id="myInput" placeholder="Search by Doctor Name" onkeyup="searchFun()">
 
-       
-
 
 
     </div><br>
     <div class="row ">
-
-
-
-      
-
-     
-
 
 
         <table class="table" id="myTable">
@@ -96,7 +87,7 @@ $query_run = mysqli_query($conn, $query);
                     <td><?php echo $rows['o_name']; ?></td>
                     <td><?php echo $rows['o_phone']; ?></td>
                     <td><?php echo $rows['o_email']; ?></td>
-                    <td><?php echo $rows['o_bgroup']; ?></td>
+                    <td><?php echo strtoupper($rows['o_bgroup']); ?></td>
                     <td><?php echo $rows['o_organ']; ?></td>
                    
                     </tr>

@@ -34,6 +34,7 @@ $visitstart = $userRow['d_visitstart'];
 
 $visitend = $userRow['d_visitend'];
 $pPic = $userRow['d_image'];
+$hospital=$userRow['d_hospital'];
 
 if (empty($_POST['password'])) {
     $passwordErr = "Password cannot be empty!";
@@ -138,7 +139,7 @@ if (isset($_POST['infoUpdate'])) {
     }
    
     if (!empty($_POST['visitstartedit']) && !empty($_POST['visitendedit'])) {
-        $query = "UPDATE `doctor` SET `d_fname`='$_POST[fname]',`d_lname`='$_POST[lname]',`d_dob`='$_POST[dob]',`d_bgroup`='$_POST[bGroup]',`d_email`='$_POST[email]',`d_phone`='$_POST[pNumber]' ,`d_department`='$_POST[dept]',`d_qualification`='$_POST[qualification]',`d_institution`='$_POST[inst]',`d_visitstart`='$_POST[visitstartedit]',`d_visitend`='$_POST[visitendedit]' WHERE `d_name` = '$user';";
+        $query = "UPDATE `doctor` SET `d_fname`='$_POST[fname]',`d_lname`='$_POST[lname]',`d_dob`='$_POST[dob]',`d_bgroup`='$_POST[bGroup]',`d_email`='$_POST[email]',`d_phone`='$_POST[pNumber]' ,`d_department`='$_POST[dept]',`d_hospital`='$_POST[hospital]',`d_visitstart`='$_POST[visitstartedit]',`d_visitend`='$_POST[visitendedit]' WHERE `d_name` = '$user';";
 
         if ($_POST['visitstartedit'] < $_POST['visitendedit']) {
             $query_run = mysqli_query($conn, $query);
@@ -234,18 +235,18 @@ include('sidebar.php');
                         <td><?php echo $userRow['d_department']; ?></td>
 
                     </tr>
-                    <tr>
+<!--                     <tr>
 
                         <td class="tdattribute">Qualification</td>
                         <td>:</td>
                         <td><?php echo $userRow['d_qualification']; ?></td>
 
-                    </tr>
+                    </tr> -->
                     <tr>
 
-                        <td class="tdattribute">Institution</td>
+                        <td class="tdattribute">Hospital</td>
                         <td>:</td>
-                        <td><?php echo $userRow['d_institution']; ?></td>
+                        <td><?php echo $userRow['d_hospital']; ?></td>
 
                     </tr>
                     <tr>
@@ -378,15 +379,42 @@ include('sidebar.php');
                         </div>
                         <div class="form-group">
                             <label>Department</label>
-                            <input type="text" class="form-control" name="dept" value="<?php echo $dept; ?>">
+                            <!-- <input type="text" class="form-control" name="dept" value="<?php echo $dept; ?>"> -->
+                            <select class="form-control" name="dept">
+                                <option value="DEPARTMENT OF EYE" <?php if ($dept == "DEPARTMENT OF EYE") echo "selected"; ?>>DEPARTMENT OF EYE</option>
+                                <option value="DEPARTMENT OF CARDIOLOGY" <?php if ($dept == "DEPARTMENT OF CARDIOLOGY") echo "selected"; ?>>DEPARTMENT OF CARDIOLOGY</option>
+                                <option value="DEPARTMENT OF SURGERY" <?php if ($dept == "DEPARTMENT OF SURGERY") echo "selected"; ?>>DEPARTMENT OF SURGERY</option>
+                                <option value="DEPARTMENT OF CARDIO THORACIC" <?php if ($dept == "DEPARTMENT OF CARDIO THORACIC") echo "selected"; ?>>DEPARTMENT OF CARDIO THORACIC</option>
+                                <option value="DEPARTMENT OF ANAESTHETIST" <?php if ($dept == "DEPARTMENT OF ANAESTHETIST") echo "selected"; ?>>DEPARTMENT OF ANAESTHETIST</option>
+                                <option value="DEPARTMENT OF GENERAL MEDICINE & HEART" <?php if ($dept == "DEPARTMENT OF GENERAL MEDICINE & HEART") echo "selected"; ?>>DEPARTMENT OF GENERAL MEDICINE & HEART</option>
+                                <option value="DEPARTMENT OF SKIN" <?php if ($dept == "DEPARTMENT OF SKIN") echo "selected"; ?>>DEPARTMENT OF SKIN</option>
+                                <option value="DEPARTMENT OF DENTAL" <?php if ($dept == "DEPARTMENT OF DENTAL") echo "selected"; ?>>DEPARTMENT OF DENTAL</option>
+                                <option value="DEPARTMENT OF ORTHOPAEDICS" <?php if ($dept == "DEPARTMENT OF ORTHOPAEDICS") echo "selected"; ?>>DEPARTMENT OF ORTHOPAEDICS</option>
+                                <option value="DEPARTMENT OF NEPHROLOGY" <?php if ($dept == "DEPARTMENT OF NEPHROLOGY") echo "selected"; ?>>DEPARTMENT OF NEPHROLOGY</option>
+                                <option value="DEPARTMENT OF NEUROLOGY" <?php if ($dept == "DEPARTMENT OF NEUROLOGY") echo "selected"; ?>>DEPARTMENT OF NEUROLOGY</option>
+                                <option value="DEPARTMENT OF GYNAECOLOGY" <?php if ($dept == "DEPARTMENT OF GYNAECOLOGY") echo "selected"; ?>>DEPARTMENT OF GYNAECOLOGY</option>
+                                <option value="DEPARTMENT OF GASTROENTEROLOGY" <?php if ($dept == "DEPARTMENT OF GASTROENTEROLOGY") echo "selected"; ?>>DEPARTMENT OF GASTROENTEROLOGY</option>
+                            </select>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label>Qualification</label>
                             <input type="text" class="form-control" name="qualification" value="<?php echo $qualification; ?>">
-                        </div>
+                        </div> -->
                         <div class="form-group">
-                            <label>Institution</label>
-                            <input type="text" class="form-control" name="inst" value="<?php echo $inst; ?>">
+                            <label>Hospital</label>
+                            <!-- <input type="text" class="form-control" name="hospital" value="<?php echo $hospital; ?>"> -->
+                                <select class="form-control" name="hospital">
+                                <option value="Square Hospital" <?php if ($hospital == "Square Hospital") echo "selected"; ?>>Square Hospital</option>
+                                <option value="Apollo Hospital" <?php if ($hospital == "Apollo Hospital") echo "selected"; ?>>Apollo Hospital</option>
+                                <option value="Labaid Hospital" <?php if ($hospital == "Labaid Hospital") echo "selected"; ?>>Labaid Hospital</option>
+                                <option value="Ibn Sina Hospital" <?php if ($hospital == "Ibn Sina Hospital") echo "selected"; ?>>Ibn Sina Hospital</option>
+                                <option value="Popular Hospital" <?php if ($hospital == "Popular Hospital") echo "selected"; ?>>Popular Hospital</option>
+                                <option value="Birdem Hospital" <?php if ($hospital == "Birdem Hospital") echo "selected"; ?>>Birdem Hospital</option>
+                                <option value="BSMMU Hospital" <?php if ($hospital == "BSMMU Hospital") echo "selected"; ?>>BSMMU Hospital</option>
+                                <option value="Bangladesh Eye Hospital" <?php if ($hospital == "Bangladesh Eye Hospital") echo "selected"; ?>>Bangladesh Eye Hospital</option>
+                                <option value="Basundhura Hospital" <?php if ($hospital == "Basundhura Hospital") echo "selected"; ?>>Basundhura Hospital</option>
+                                <option value="Dhaka Medical College" <?php if ($hospital == "Dhaka Medical College") echo "selected"; ?>>Dhaka Medical College</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <div class="row">
