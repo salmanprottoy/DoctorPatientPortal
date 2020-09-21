@@ -15,7 +15,7 @@
 					<i class="fas fa-calendar"></i><span> Appointment</span></a>
 				<ul class="collapse list-unstyled" id="Submenu">
 					<li>
-						<a href="bookAppointment.php"><i class="fa fa-calendar-plus-o"></i><span> Book Appointment</span></a>
+						<a href="searchdoctor.php"><i class="fa fa-calendar-plus-o"></i><span> Book Appointment</span></a>
 					</li>
 					<li>
 						<a href="appointmentHistory.php"><i class="fa fa-history"></i><span> Appointment History</span></a>

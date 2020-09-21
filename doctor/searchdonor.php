@@ -4,7 +4,7 @@ include('../includes/db_connect.inc.php');
 include('../includes/header.php');
 include('navbar.php');
 include('sidebar.php');
-
+$user = $_SESSION['user_name'];
 
 $query = "SELECT * FROM `organ`;";
 $query_run = mysqli_query($conn, $query);
@@ -98,6 +98,23 @@ $query_run = mysqli_query($conn, $query);
                     <td><?php echo $rows['o_email']; ?></td>
                     <td><?php echo $rows['o_bgroup']; ?></td>
                     <td><?php echo $rows['o_organ']; ?></td>
+                    <?php
+                    if($rows['p_name'] == $user){
+                    
+                            ?>
+                            <td><button type="button" class="btn btn-primary">Edit</button>
+                           <button type="button" class="btn btn-primary">Delete</button></td>
+                            <?php
+                        
+                    }else{
+                        ?>
+                        <td><button type="button" class="btn btn-primary">View</button></td>
+                        <?php
+                    
+                    }
+
+
+                    ?>
                    
                     </tr>
                     <?php

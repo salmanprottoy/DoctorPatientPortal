@@ -127,8 +127,8 @@ $query_run = mysqli_query($conn, $query);
                                 <td><img class="card-img" src="<?php echo $rows['p_pic']; ?>" alt="Card image cap" style="width: 18rem; height: 9rem;display: block;margin-left: auto; margin-right: 10px;object-fit:cover;"></td>
                                 <td><strong><?php echo $rows['p_fname']; ?> <?php echo $rows['p_lname']; ?></strong><br>
                                     <?php echo $rows['p_bgroup']; ?><br>
-                                    <?php echo $rows['p_email']; ?><br>
-                                    <a href="#" class="btn btn-primary">Details</a>&nbsp; <a href="#" class="btn btn-primary">Make Appointment</a></td>
+                                    <?php echo $rows['p_email']; ?></td>
+                                   <td> <a href="#" class="btn btn-primary">Details</a><br><br> <a href="#" class="btn btn-primary">Make Appointment</a></td>
                             </tr>
 
                     <?php
