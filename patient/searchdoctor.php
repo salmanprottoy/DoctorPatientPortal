@@ -6,8 +6,43 @@ include('navbar.php');
 
 
 
+
+
+
 $query = "SELECT * FROM `doctor`;";
 $query_run = mysqli_query($conn, $query);
+
+
+
+$user = $_SESSION['user_name'];
+$res = mysqli_query($conn, "SELECT * FROM `patient` WHERE `p_name` = '$user';");
+$userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
+
+$doc_name = $d_visitstart = $d_visitend = $doc_inst = $p_name = $p_bg = $p_phn = $p_problem = $app_date = $app_time = $serial = "";
+
+
+
+if(isset($_POST['bookappointment'])){
+
+
+
+
+    if (!empty($_POST['app_date']) && !empty($_POST['app_time'])) {
+        $query = "UPDATE `appointment` SET `p_name`='$_POST[p_name]',`p_bg`='$_POST[p_bg]',`p_phone`='$_POST[p_phn]',`p_problem`='$_POST[p_problem]', `isTaken`='1' WHERE `app_time` = '$_POST[app_time]';";
+
+      
+            $query_run = mysqli_query($conn, $query);
+            if ($query_run) {
+                echo '<script type=text/javaScript> alert("Data Updated") </script>';
+               
+            } else {
+                echo '<script type=text/javaScript> alert("Something wrong data not updated!") </script>';
+            }
+        
+    }else{
+        echo '<script type=text/javaScript> alert(" not updated!") </script>'; 
+    }
+}
 
 
 
@@ -102,7 +137,7 @@ include('sidebar.php');
                                     <input type="hidden" name="edit_id" value="<?php echo $rows['d_id']; ?>">
                                     <!-- <a href="bookAppointment.php" name="edit_btn" class="btn btn-primary">Make Appointment</a> -->
                                     <button name="edit_btn" class="btn btn-primary">Make Appointment</button>
-                                    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bookapp"><i class="fa fa-calendar-plus-o"></i></button> -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bookapp"><i class="fa fa-calendar-plus-o"></i></button>
                                 </form>
                             </td>
 
@@ -123,10 +158,10 @@ include('sidebar.php');
 
 
 
-        
+
 
     </div>
-    <!-- <div class="modal fade" id="bookapp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="bookapp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -138,97 +173,143 @@ include('sidebar.php');
                 <div class="modal-body">
                     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                         <div class="form-group">
-                            <label for="password">Current Password</label>
-                            <input type="password" class="form-control" name="password">
+                            <label>Doctor Name</label>
+                            <input type="text" class="form-control" name="doc_name" value="<?php echo $rows['d_fname']; ?> <?php echo $rows['d_lname']; ?>" readonly>
+                            <input type="text" class="form-control" name="doc_name" id="d_id" value="<?php echo $rows['d_id']; ?>" readonly>
+
+
+
                         </div>
                         <div class="form-group">
-                            <label for="nPassword">New Password</label>
-                            <input type="password" class="form-control" name="nPassword">
+                            <label>Doctor Institute</label>
+                            <input type="text" class="form-control" name="doc_inst" readonly value="<?php echo $rows['d_institution']; ?>">
+
                         </div>
                         <div class="form-group">
-                            <label for="cPassword">Confirm Password</label>
-                            <input type="password" class="form-control" name="cPassword">
+                            <label>Patient Name</label>
+                            <input type="text" class="form-control" name="p_name" readonly value="<?php echo $userRow['p_fname']; ?> <?php echo $userRow['p_lname']; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label>Patient Blood Group</label>
+                            <input type="text" class="form-control" name="p_bg" readonly value="<?php echo $userRow['p_bgroup']; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label>Patient Contact No</label>
+                            <input type="number" class="form-control" name="p_phn" readonly value="<?php echo $userRow['p_phone']; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label>Problem Explanation(optional)</label><br>
+                            <textarea name="p_problem" class="form-control" id="" cols="45" rows="3"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Appointment Date</label>
+                            <input type="date" class="form-control" name="app_date" id="app_date" >
+
+                        </div>
+                        <div class="form-group">
+                            <label>visiting Time</label>
+                            <select class="form-control" name="app_time" id="dataget">
+                                <option value="">Choose any one</option>
+                            </select>
                         </div>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" name="passUpdate">Update</button>
+                    <button type="submit" class="btn btn-primary" name="bookappointment">Book Appointment</button>
                 </div>
                 </form>
             </div>
         </div>
-    </div> -->
+    </div>
 </div>
 <script>
-    
+                 $(document).ready(function() {
+                     $("#app_date").click(function() {
+                         var datavalue = $('#app_date').val();
+                         var d_id = $('#d_id').val();
+                        $.ajax({
+                            url: "timing.php",
+                            type: "POST",
+                            data: {
+                                datapost: datavalue,
+                                d_id : d_id 
+                            },
 
-    function searchFun() {
-        var filter = document.getElementById('myInput').value.toUpperCase();
-        var myTable = document.getElementById('myTable');
-        var tr = myTable.getElementsByTagName('tr');
+                            success: function(result) {
+                                $('#dataget').html(result);
+                            }
+                        });
+                    });
+                });
 
-        for (var i = 0; i < tr.length; i++) {
-            var td = tr[i].getElementsByTagName('strong');
+                function searchFun() {
+                    var filter = document.getElementById('myInput').value.toUpperCase();
+                    var myTable = document.getElementById('myTable');
+                    var tr = myTable.getElementsByTagName('tr');
 
-            if (td) {
-                var text_value = td[0].innerHTML;
-                if (text_value.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
+                    for (var i = 0; i < tr.length; i++) {
+                        var td = tr[i].getElementsByTagName('strong');
+
+                        if (td) {
+                            var text_value = td[0].innerHTML;
+                            if (text_value.toUpperCase().indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                        }
+                    }
                 }
-            }
-        }
-    }
 
-    function deptSearch() {
-        var filter = document.getElementById('drpdwnDept').value.toUpperCase();
-        var myTable = document.getElementById('myTable');
-        var tr = myTable.getElementsByTagName('tr');
+                function deptSearch() {
+                    var filter = document.getElementById('drpdwnDept').value.toUpperCase();
+                    var myTable = document.getElementById('myTable');
+                    var tr = myTable.getElementsByTagName('tr');
 
-        for (var i = 1; i < tr.length; i++) {
-            var td = tr[i].getElementsByTagName('td')[2];
-            if (td) {
-                var text_value = td.textContent || td.innerHTML;
-                if (text_value.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
+                    for (var i = 1; i < tr.length; i++) {
+                        var td = tr[i].getElementsByTagName('td')[2];
+                        if (td) {
+                            var text_value = td.textContent || td.innerHTML;
+                            if (text_value.toUpperCase().indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                        }
+                    }
                 }
-            }
-        }
-    }
 
-    function hospitalSearch() {
-        var filter = document.getElementById('drpdwnHospital').value.toUpperCase();
-        var myTable = document.getElementById('myTable');
-        var tr = myTable.getElementsByTagName('tr');
+                function hospitalSearch() {
+                    var filter = document.getElementById('drpdwnHospital').value.toUpperCase();
+                    var myTable = document.getElementById('myTable');
+                    var tr = myTable.getElementsByTagName('tr');
 
-        for (var i = 1; i < tr.length; i++) {
-            var td = tr[i].getElementsByTagName('td')[2];
-            if (td) {
-                var text_value = td.textContent || td.innerHTML;
-                if (text_value.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
+                    for (var i = 1; i < tr.length; i++) {
+                        var td = tr[i].getElementsByTagName('td')[2];
+                        if (td) {
+                            var text_value = td.textContent || td.innerHTML;
+                            if (text_value.toUpperCase().indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                        }
+                    }
                 }
-            }
-        }
-    }
 
-    $(document).ready(function() {
+                $(document).ready(function() {
 
 
 
-        $("#drpdwnInput").on("keyup", function() {
-            var value = $(this).val().toLowerCase();
-            $(".dropdown-menu li").filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
-    });
+                    $("#drpdwnInput").on("keyup", function() {
+                        var value = $(this).val().toLowerCase();
+                        $(".dropdown-menu li").filter(function() {
+                            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                        });
+                    });
+                });
 </script>
 
 
