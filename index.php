@@ -20,7 +20,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav ml-auto" align="right">
                 <li class="nav-item active">
-                  <a class="nav-link" href="index.html">Home </a>
+                  <a class="nav-link" href="index.php">Home </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#services">Services</a>
@@ -165,7 +165,7 @@
                 </div>
             </div>
             <hr>
-            <p class="copyright">Designed by Rayhan,Salman,Alvy & Anika</p>
+            <p class="copyright">Designed by Rayhan, Salman, Alvy & Anika</p>
         </div>
     </section>
 </body>
