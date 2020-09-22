@@ -155,7 +155,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 	<div class="container">
        <br>
         <h1 class="text-black text-center">Login</h1>
-		<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype = "multipart/form-data">
+		<form name="myForm" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype = "multipart/form-data">
         	<div class="col-lg-8 m-auto d-block">
 				<div class="form-group">
 					<label >Type</label>
@@ -183,6 +183,23 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
              </div>
 			</div>
         </form>
+		<script>
+		var loginForm = document.forms.myForm;
+		loginForm.onsubmit = function(){
+			var userName = loginForm.username.value;
+			var pass = loginForm.password.value;
+			if(userName=="")
+			{
+				alert("Username must be filled out!");
+				return false;
+			}
+			if(pass=="")
+			{
+				alert("Password must be filled out!");
+				return false;
+			}
+		}
+		</script>
     </div>
 </body>
 </html>
