@@ -118,7 +118,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 	{
 		if($accountType=="doctor")
 		{
-			$sqlUsers = "select d_id from doctor where d_name = '$userName'";
+			$sqlUsers = "select d_id from docreq where d_name = '$userName'";
       		$results = mysqli_query($conn, $sqlUsers);
 
 			  $rowCount = mysqli_num_rows($results);
@@ -128,7 +128,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 			  }
 			  else
 			  {
-				  $sqlInsert = "insert into doctor (d_name, d_pass, d_fname, d_lname, d_dob, d_bgroup, d_email, d_phone)
+				  $sqlInsert = "insert into docreq (d_name, d_pass, d_fname, d_lname, d_dob, d_bgroup, d_email, d_phone)
 				  values('$username', '$uPassInDB','$fname','$lname', '$dob', '$bGroup', '$email', '$pNumber');";
 
 				  mysqli_query($conn, $sqlInsert);
@@ -192,7 +192,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
        <br>
 	   	<h3 style="color:green;"><?php echo $regSuccessful; ?></h3>
         <h1 class="text-black text-center">Signup</h1>
-		<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype = "multipart/form-data">
+		<form name="myForm" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype = "multipart/form-data">
         	<div class="col-lg-8 m-auto d-block">
 				<div class="form-group">
 					<label >Type</label>
@@ -260,6 +260,65 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
              	</div>
 			</div>
         </form>
+		<script>
+		var signupForm = document.forms.myForm;
+		signupForm.onsubmit = function(){
+			var userName = signupForm.username.value;
+			var password = signupForm.password.value;
+			var cPassword = signupForm.cPassword.value;
+			var fname = signupForm.fname.value;
+			var lname = signupForm.lname.value;
+			var dob = signupForm.dob.value;
+			var bGroup = signupForm.bGroup.value;
+			var email = signupForm.email.value;
+			var pNumber = signupForm.pNumber.value;
+			if(userName=="")
+			{
+				alert("Username must be filled out!");
+				return false;
+			}
+			if(password=="")
+			{
+				alert("Password must be filled out!");
+				return false;
+			}
+			if(cPassword=="")
+			{
+				alert("Password must be filled out!");
+				return false;
+			}
+			if(fname=="")
+			{
+				alert("First Name must be filled out!");
+				return false;
+			}
+			if(lname=="")
+			{
+				alert("Last Name must be filled out!");
+				return false;
+			}
+			if(dob=="")
+			{
+				alert("Date of birth must be filled out!");
+				return false;
+			}
+			if(bGroup=="")
+			{
+				alert("Blood group must be filled out!");
+				return false;
+			}
+			if(email=="")
+			{
+				alert("Email must be filled out!");
+				return false;
+			}
+			if(pNumber=="")
+			{
+				alert("Phone number must be filled out!");
+				return false;
+			}
+		}
+		</script>
     </div>
 </body>
 </html>
