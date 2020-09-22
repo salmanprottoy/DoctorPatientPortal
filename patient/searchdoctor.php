@@ -31,8 +31,8 @@ if(isset($_POST['bookappointment'])){
         $query = "UPDATE `appointment` SET `p_name`='$_POST[p_name]',`p_bg`='$_POST[p_bg]',`p_phone`='$_POST[p_phn]',`p_problem`='$_POST[p_problem]', `isTaken`='1' WHERE `app_time` = '$_POST[app_time]';";
 
       
-            $query_run = mysqli_query($conn, $query);
-            if ($query_run) {
+            $query_run1 = mysqli_query($conn, $query);
+            if ($query_run1) {
                 echo '<script type=text/javaScript> alert("Data Updated") </script>';
                
             } else {
@@ -171,7 +171,7 @@ include('sidebar.php');
                     </button>
                 </div>
                 <div class="modal-body" >
-                    <!-- <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST"> -->
+                     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                     <div id="modal_body">
 
                     </div>
@@ -198,7 +198,7 @@ include('sidebar.php');
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary" name="bookappointment" >Book Appointment</button>
                 </div>
-                <!-- </form> -->
+                </form>
             </div>
         </div>
     </div>
