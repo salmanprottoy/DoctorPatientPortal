@@ -2,6 +2,10 @@
 
 require "includes/db_connect.inc.php";
 
+if(isset($_COOKIE['user_name'])){
+	//setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
+}
+
 if (isset($_SESSION['user_name'])) {
     //header("../login.php");
 }
