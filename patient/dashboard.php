@@ -17,7 +17,7 @@ $query_run=mysqli_query($conn, $query);
 $rows_count_value = mysqli_num_rows($query_run);
 $tPatient=$rows_count_value;
 
-$query = "SELECT * from donor;";
+$query = "SELECT * from organ;";
 $query_run=mysqli_query($conn, $query);
 $rows_count_value = mysqli_num_rows($query_run);
 $tDonor=$rows_count_value;

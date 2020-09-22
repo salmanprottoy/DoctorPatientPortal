@@ -137,7 +137,7 @@ include('sidebar.php');
                                     <input type="hidden" name="edit_id" value="<?php echo $rows['d_id']; ?>">
                                     <!-- <a href="bookAppointment.php" name="edit_btn" class="btn btn-primary">Make Appointment</a> -->
                                     <button name="edit_btn" class="btn btn-primary">Make Appointment</button>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bookapp"><i class="fa fa-calendar-plus-o"></i></button>
+                                    <button type="button" class="btn btn-primary" id="book" data-toggle="modal" data-target="#bookapp"><i class="fa fa-calendar-plus-o"></i></button>
                                 </form>
                             </td>
 

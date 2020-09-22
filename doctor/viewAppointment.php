@@ -41,7 +41,6 @@ if (isset($_POST['createappointment'])) {
 
 
 
-
 include('sidebar.php');
 ?>
 
