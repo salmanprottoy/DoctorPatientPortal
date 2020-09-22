@@ -22,11 +22,11 @@
    					</li>
    				</ul> 
    			</li>
+			   <li>
+   				<a href="doctorRequest.php"><i class="fa fa-user-md"></i>Doctor Request</a>
+			</li>
    			<li>
    				<a href="doctors.php"><i class="fa fa-user-md"></i>Doctors</a>
-			</li>
-			<li>
-   				<a href="addHospital.php"><i class="fa fa-user-md"></i>Add Hospital</a>
 			</li>
 			<li>
    				<a href="patients.php"><i class="fa fa-user"></i>Patients</a>
