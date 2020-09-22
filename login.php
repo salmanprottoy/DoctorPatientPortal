@@ -2,10 +2,8 @@
 
 require "includes/db_connect.inc.php";
 
-if(isset($_SESSION['user_name'])){
-	if($_SESSION['utype'] == "admin"){
-		header("Location: ./admin");
-	}
+if (isset($_SESSION['user_name'])) {
+    //header("../login.php");
 }
 
 session_start();
