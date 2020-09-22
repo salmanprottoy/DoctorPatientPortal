@@ -100,7 +100,7 @@ include('sidebar.php');
 
 
 
-        <input type="text" name="" id="myInput" placeholder="Search by Doctor Name" onkeyup="searchFun()">
+        <input type="text" name="" id="myInput" placeholder="Search by Doctor Name" onkeyup="searchDoc()">
 
         <input type="submit" class="btn btn-primary" name="infoUpdate" value="Search"></button>
 
@@ -136,8 +136,8 @@ include('sidebar.php');
                                 <form action="bookAppointment.php" method="POST">
                                     <input type="hidden" name="edit_id" value="<?php echo $rows['d_id']; ?>">
                                     <!-- <a href="bookAppointment.php" name="edit_btn" class="btn btn-primary">Make Appointment</a> -->
-                                    <button name="edit_btn" class="btn btn-primary">Make Appointment</button>
-                                    <button type="button" class="btn btn-primary" id="book" data-toggle="modal" data-target="#bookapp"><i class="fa fa-calendar-plus-o"></i></button>
+                                    <!-- <button name="edit_btn" class="btn btn-primary">Make Appointment</button> -->
+                                    <button type="button" class="btn btn-primary bookappo" id="<?php echo $rows['d_id']; ?>" data-toggle="modal" data-target="#bookapp"><i class="fa fa-calendar-plus-o"></i></button>
                                 </form>
                             </td>
 
@@ -170,34 +170,12 @@ include('sidebar.php');
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-                        <div class="form-group">
-                            <label>Doctor Name</label>
-                            <input type="text" class="form-control" name="doc_name" value="<?php echo $rows['d_fname']; ?> <?php echo $rows['d_lname']; ?>" readonly>
-                            <input type="text" class="form-control" name="doc_name" id="d_id" value="<?php echo $rows['d_id']; ?>" readonly>
+                <div class="modal-body" >
+                    <!-- <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST"> -->
+                    <div id="modal_body">
 
-
-
-                        </div>
-                        <div class="form-group">
-                            <label>Doctor Institute</label>
-                            <input type="text" class="form-control" name="doc_inst" readonly value="<?php echo $rows['d_institution']; ?>">
-
-                        </div>
-                        <div class="form-group">
-                            <label>Patient Name</label>
-                            <input type="text" class="form-control" name="p_name" readonly value="<?php echo $userRow['p_fname']; ?> <?php echo $userRow['p_lname']; ?>">
-                        </div>
-                        <div class="form-group">
-                            <label>Patient Blood Group</label>
-                            <input type="text" class="form-control" name="p_bg" readonly value="<?php echo $userRow['p_bgroup']; ?>">
-                        </div>
-                        <div class="form-group">
-                            <label>Patient Contact No</label>
-                            <input type="number" class="form-control" name="p_phn" readonly value="<?php echo $userRow['p_phone']; ?>">
-                        </div>
-                        <div class="form-group">
+                    </div>
+                    <div class="form-group">
                             <label>Problem Explanation(optional)</label><br>
                             <textarea name="p_problem" class="form-control" id="" cols="45" rows="3"></textarea>
                         </div>
@@ -213,13 +191,14 @@ include('sidebar.php');
                                 <option value="">Choose any one</option>
                             </select>
                         </div>
+                        
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" name="bookappointment">Book Appointment</button>
+                    <button type="submit" class="btn btn-primary" name="bookappointment" >Book Appointment</button>
                 </div>
-                </form>
+                <!-- </form> -->
             </div>
         </div>
     </div>
@@ -242,9 +221,21 @@ include('sidebar.php');
                             }
                         });
                     });
+
+                    $(".bookappo").click(function(){
+                        var d_id = $(this).attr('id');
+                        $.ajax({
+                            url : "popup_data.php",
+                            type : "POST",
+                            data : { d_id : d_id},
+                            success:function(data){
+                                $('#modal_body').html(data);
+                            }
+                        });
+                    });
                 });
 
-                function searchFun() {
+                function searchDoc() {
                     var filter = document.getElementById('myInput').value.toUpperCase();
                     var myTable = document.getElementById('myTable');
                     var tr = myTable.getElementsByTagName('tr');
